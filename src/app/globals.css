@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-inter: 'Inter', system-ui, sans-serif;
+  --font-playfair: 'Playfair Display', Georgia, serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-feminine-pink hover:bg-feminine-pink-dark text-white font-semibold py-4 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5;
+  }
+  
+  .btn-secondary {
+    @apply bg-white hover:bg-feminine-pink-light text-feminine-charcoal font-medium py-3 px-6 rounded-full border-2 border-feminine-pink transition-all duration-300;
+  }
+  
+  .card-option {
+    @apply bg-white rounded-2xl p-6 cursor-pointer transition-all duration-300 border-2 border-transparent hover:border-feminine-pink hover:shadow-lg;
+  }
+  
+  .card-option-selected {
+    @apply bg-feminine-pink-light border-feminine-pink shadow-lg;
+  }
+  
+  .quiz-container {
+    @apply min-h-screen flex flex-col items-center justify-center px-4 py-8;
+  }
+  
+  .question-text {
+    @apply font-display text-2xl md:text-3xl lg:text-4xl text-center mb-8 text-feminine-charcoal;
+  }
+  
+  .progress-bar {
+    @apply h-1 bg-feminine-pink-light rounded-full overflow-hidden;
+  }
+  
+  .progress-fill {
+    @apply h-full bg-feminine-pink transition-all duration-500 ease-out;
+  }
+}
+
+input[type="text"], textarea {
+  @apply w-full p-4 rounded-xl border-2 border-feminine-beige focus:border-feminine-pink focus:outline-none transition-colors bg-white text-feminine-charcoal;
+}
+
+input[type="radio"], input[type="checkbox"] {
+  @apply accent-feminine-pink;
+}
+
+select {
+  @apply w-full p-4 rounded-xl border-2 border-feminine-beige focus:border-feminine-pink focus:outline-none transition-colors bg-white text-feminine-charcoal appearance-none cursor-pointer;
+}
