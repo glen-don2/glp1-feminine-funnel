@@ -9,11 +9,11 @@ interface DietEmotionScreenProps {
   onNext: () => void
 }
 
-const emotionOptions: { value: DietEmotion; label: string }[] = [
-  { value: 'frustrated', label: 'Frustrated that nothing sticks' },
-  { value: 'ashamed', label: 'Ashamed that I lack willpower' },
-  { value: 'angry', label: 'Angry that I wasted so much money' },
-  { value: 'hopeless', label: 'Hopeless that I will never figure this out' },
+const emotionOptions: { value: DietEmotion; label: string; feeling: string }[] = [
+  { value: 'frustrated', label: 'Frustrated that nothing sticks', feeling: 'Like I am spinning my wheels' },
+  { value: 'ashamed', label: 'Ashamed that I lack willpower', feeling: 'Like something is wrong with me' },
+  { value: 'angry', label: 'Angry that I wasted so much money', feeling: 'Like I have been taken advantage of' },
+  { value: 'hopeless', label: 'Hopeless that I will never figure this out', feeling: 'Like giving up is the only option' },
 ]
 
 export default function DietEmotionScreen({
@@ -38,7 +38,7 @@ export default function DietEmotionScreen({
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
       >
-        Own the emotion. It is valid.
+        Your feelings are valid. Name them.
       </motion.p>
 
       <div className="space-y-3 mb-8">
@@ -53,7 +53,8 @@ export default function DietEmotionScreen({
             whileHover={{ scale: 1.01 }}
             whileTap={{ scale: 0.99 }}
           >
-            <span className="font-medium">{option.label}</span>
+            <div className="font-medium mb-1">{option.label}</div>
+            <div className="text-sm text-feminine-gray-soft italic">{option.feeling}</div>
           </motion.button>
         ))}
       </div>

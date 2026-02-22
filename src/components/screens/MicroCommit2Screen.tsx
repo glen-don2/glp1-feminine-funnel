@@ -55,7 +55,7 @@ export default function MicroCommit2Screen({ value, onYes }: MicroCommit2ScreenP
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
         >
-          If we show you a solution that addresses your specific hormonal pattern. No injections. No rebound weight. Just results. Are you open to seeing it?
+          We have identified your specific hormonal blocks. Thousands of women with your exact pattern have transformed their bodies using our targeted approach.
         </motion.p>
 
         <motion.div
@@ -64,10 +64,25 @@ export default function MicroCommit2Screen({ value, onYes }: MicroCommit2ScreenP
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
         >
-          <p className="text-sm italic text-feminine-gray-soft">
-            "I commit to at least exploring a solution that could give me the body I deserve."
+          <p className="text-sm font-medium text-feminine-charcoal mb-2">
+            In the next 60 seconds, you will discover:
           </p>
+          <ul className="text-sm text-feminine-gray-soft space-y-1">
+            <li>✓ Your specific hormonal block type</li>
+            <li>✓ Why diets have failed you</li>
+            <li>✓ The exact protocol for your body</li>
+            <li>✓ Real results from women like you</li>
+          </ul>
         </motion.div>
+
+        <motion.p
+          className="text-feminine-pink font-semibold"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6 }}
+        >
+          No injections. No extreme dieting. Just results.
+        </motion.p>
       </motion.div>
 
       <motion.button
@@ -75,7 +90,7 @@ export default function MicroCommit2Screen({ value, onYes }: MicroCommit2ScreenP
         className="btn-primary w-full"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.6 }}
+        transition={{ delay: 0.7 }}
       >
         Yes. Show me my diagnosis.
       </motion.button>

@@ -9,11 +9,11 @@ interface FutureFearScreenProps {
   onNext: () => void
 }
 
-const fearOptions: { value: FutureFear; label: string }[] = [
-  { value: 'never_reach_goal', label: 'That I will never reach my goal weight' },
-  { value: 'pass_habits_to_kids', label: 'That I will pass these habits to my kids' },
-  { value: 'keep_gaining', label: 'That I will keep gaining weight' },
-  { value: 'health_decline', label: 'That my health will continue to decline' },
+const fearOptions: { value: FutureFear; label: string; consequence: string }[] = [
+  { value: 'never_reach_goal', label: 'That I will never reach my goal weight', consequence: 'I will feel this way forever' },
+  { value: 'pass_habits_to_kids', label: 'That I will pass these habits to my kids', consequence: 'They will struggle like I have' },
+  { value: 'keep_gaining', label: 'That I will keep gaining weight', consequence: 'I will keep missing out on life' },
+  { value: 'health_decline', label: 'That my health will continue to decline', consequence: 'I will lose my independence' },
 ]
 
 export default function FutureFearScreen({ value, onChange, onNext }: FutureFearScreenProps) {
@@ -34,7 +34,7 @@ export default function FutureFearScreen({ value, onChange, onNext }: FutureFear
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
       >
-        If nothing changes, this is what haunts you
+        If nothing changes, this is the pain you will carry
       </motion.p>
       
       <div className="space-y-3 mb-8">
@@ -49,7 +49,8 @@ export default function FutureFearScreen({ value, onChange, onNext }: FutureFear
             whileHover={{ scale: 1.01 }}
             whileTap={{ scale: 0.99 }}
           >
-            <span className="font-medium">{option.label}</span>
+            <div className="font-medium mb-1">{option.label}</div>
+            <div className="text-sm text-feminine-gray-soft italic">{option.consequence}</div>
           </motion.button>
         ))}
       </div>

@@ -9,11 +9,11 @@ interface FinalAdmissionScreenProps {
   onNext: () => void
 }
 
-const admissionOptions: { value: FinalAdmission; label: string }[] = [
-  { value: 'belly_fat', label: 'Belly fat that will not budge' },
-  { value: 'energy_crashes', label: 'Energy crashes that ruin my day' },
-  { value: 'cravings', label: 'Cravings I cannot control' },
-  { value: 'scale_stuck', label: 'The scale not moving no matter what' },
+const admissionOptions: { value: FinalAdmission; label: string; claim: string }[] = [
+  { value: 'belly_fat', label: 'Belly fat that will not budge', claim: 'I claim control over my midsection' },
+  { value: 'energy_crashes', label: 'Energy crashes that ruin my day', claim: 'I claim all-day energy' },
+  { value: 'cravings', label: 'Cravings I cannot control', claim: 'I claim power over my appetite' },
+  { value: 'scale_stuck', label: 'The scale not moving no matter what', claim: 'I claim a body that responds' },
 ]
 
 export default function FinalAdmissionScreen({ value, onChange, onNext }: FinalAdmissionScreenProps) {
@@ -34,7 +34,7 @@ export default function FinalAdmissionScreen({ value, onChange, onNext }: FinalA
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
       >
-        This is the #1 thing blocking your progress
+        Claim the transformation you are ready for
       </motion.p>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
@@ -49,7 +49,8 @@ export default function FinalAdmissionScreen({ value, onChange, onNext }: FinalA
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            <span className="font-medium">{option.label}</span>
+            <div className="font-medium mb-1">{option.label}</div>
+            <div className="text-sm text-feminine-gray-soft italic">{option.claim}</div>
           </motion.button>
         ))}
       </div>

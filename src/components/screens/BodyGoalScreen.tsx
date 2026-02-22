@@ -9,11 +9,11 @@ interface BodyGoalScreenProps {
   onNext: () => void
 }
 
-const bodyGoalOptions: { value: BodyGoal; label: string; emoji: string }[] = [
-  { value: 'slim_toned', label: 'Slim, toned, and full of energy', emoji: '✨' },
-  { value: 'strong_athletic', label: 'Strong, fit, and confident', emoji: '💪' },
-  { value: 'curvy_confident', label: 'Curvy and comfortable in my skin', emoji: '👗' },
-  { value: 'healthy_energetic', label: 'Back to how I looked in my 30s', emoji: '🌟' },
+const bodyGoalOptions: { value: BodyGoal; label: string; emoji: string; feeling: string }[] = [
+  { value: 'slim_toned', label: 'Slim, toned, and full of energy', emoji: '✨', feeling: 'I feel light, confident, and unstoppable' },
+  { value: 'strong_athletic', label: 'Strong, fit, and confident', emoji: '💪', feeling: 'I feel powerful and proud of my body' },
+  { value: 'curvy_confident', label: 'Curvy and comfortable in my skin', emoji: '👗', feeling: 'I feel beautiful exactly as I am' },
+  { value: 'healthy_energetic', label: 'Back to how I looked in my 30s', emoji: '🌟', feeling: 'I feel like myself again' },
 ]
 
 export default function BodyGoalScreen({ value, onChange, onNext }: BodyGoalScreenProps) {
@@ -34,7 +34,7 @@ export default function BodyGoalScreen({ value, onChange, onNext }: BodyGoalScre
         animate={{ opacity: 1 }}
         transition={{ delay: 0.15 }}
       >
-        Visualize the woman you are becoming
+        How will you feel when you look in the mirror?
       </motion.p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
@@ -52,7 +52,8 @@ export default function BodyGoalScreen({ value, onChange, onNext }: BodyGoalScre
             <div className="flex items-start gap-4">
               <span className="text-3xl">{option.emoji}</span>
               <div>
-                <div className="font-semibold text-lg">{option.label}</div>
+                <div className="font-semibold text-lg mb-1">{option.label}</div>
+                <div className="text-sm text-feminine-gray-soft italic">{option.feeling}</div>
               </div>
             </div>
           </motion.button>

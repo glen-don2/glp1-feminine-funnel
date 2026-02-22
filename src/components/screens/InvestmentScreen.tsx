@@ -9,11 +9,11 @@ interface InvestmentScreenProps {
   onNext: () => void
 }
 
-const investmentOptions: { value: InvestmentLevel; label: string }[] = [
-  { value: 'under_50', label: 'I am worth investing in' },
-  { value: '50_100', label: 'I deserve a solution that actually works' },
-  { value: '100_200', label: 'I cannot keep living like this' },
-  { value: 'whatever_it_takes', label: 'I am ready to fix this once and for all' },
+const investmentOptions: { value: InvestmentLevel; label: string; feeling: string }[] = [
+  { value: 'under_50', label: 'I am worth investing in', feeling: 'I deserve to prioritize myself' },
+  { value: '50_100', label: 'I deserve a solution that actually works', feeling: 'No more wasting time on false promises' },
+  { value: '100_200', label: 'I cannot keep living like this', feeling: 'The pain of staying the same is too great' },
+  { value: 'whatever_it_takes', label: 'I am ready to fix this once and for all', feeling: 'I am committed to my transformation' },
 ]
 
 export default function InvestmentScreen({ value, onChange, onNext }: InvestmentScreenProps) {
@@ -49,7 +49,8 @@ export default function InvestmentScreen({ value, onChange, onNext }: Investment
             whileHover={{ scale: 1.01 }}
             whileTap={{ scale: 0.99 }}
           >
-            <span className="font-medium">{option.label}</span>
+            <div className="font-medium mb-1">{option.label}</div>
+            <div className="text-sm text-feminine-gray-soft italic">{option.feeling}</div>
           </motion.button>
         ))}
       </div>
