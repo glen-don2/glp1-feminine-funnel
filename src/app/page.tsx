@@ -18,12 +18,13 @@ import ProblemAreasScreen from '@/components/screens/ProblemAreasScreen'
 import StressPatternScreen from '@/components/screens/StressPatternScreen'
 import DietEmotionScreen from '@/components/screens/DietEmotionScreen'
 import EmotionSeverityScreen from '@/components/screens/EmotionSeverityScreen'
+import InfoPivotScreen from '@/components/screens/InfoPivotScreen'
 import FutureFearScreen from '@/components/screens/FutureFearScreen'
 import FinalAdmissionScreen from '@/components/screens/FinalAdmissionScreen'
 import MicroCommit2Screen from '@/components/screens/MicroCommit2Screen'
 import LoadingScreen from '@/components/screens/LoadingScreen'
 
-const TOTAL_SCREENS = 15
+const TOTAL_SCREENS = 16
 
 export default function QuizPage() {
   const router = useRouter()
@@ -57,7 +58,7 @@ export default function QuizPage() {
     updateState({ 
       diagnosis,
       completedAt: new Date().toISOString(),
-      currentScreen: 15 
+      currentScreen: 16 
     })
     router.push('/results')
   }, [state, updateState, router])
@@ -152,7 +153,7 @@ export default function QuizPage() {
             onNext={nextScreen}
           />
         )
-      // Phase 3: Negative/Ownership (Screens 10-13)
+      // Phase 3: Negative/Ownership (Screens 10-14)
       case 10:
         return (
           <DietEmotionScreen
@@ -171,13 +172,19 @@ export default function QuizPage() {
         )
       case 12:
         return (
+          <InfoPivotScreen
+            onNext={nextScreen}
+          />
+        )
+      case 13:
+        return (
           <FutureFearScreen
             value={state.futureFear}
             onChange={(futureFear) => updateState({ futureFear })}
             onNext={nextScreen}
           />
         )
-      case 13:
+      case 14:
         return (
           <FinalAdmissionScreen
             value={state.finalAdmission}
@@ -185,8 +192,8 @@ export default function QuizPage() {
             onNext={nextScreen}
           />
         )
-      // Commitment Screen (14)
-      case 14:
+      // Commitment Screen (15)
+      case 15:
         return (
           <MicroCommit2Screen
             value={state.microCommit2}
@@ -200,8 +207,8 @@ export default function QuizPage() {
             }}
           />
         )
-      // Loading/Summary (15)
-      case 15:
+      // Loading/Summary (16)
+      case 16:
         return <LoadingScreen onComplete={goToResults} blockType={state.diagnosis} />
       default:
         return null
