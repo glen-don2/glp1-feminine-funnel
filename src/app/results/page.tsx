@@ -187,7 +187,7 @@ export default function ResultsPage() {
             className="text-center mb-12"
           >
             <h2 className="text-2xl md:text-3xl font-light text-feminine-charcoal mb-4">
-              Why Traditional Diets Have Failed You
+              Why YOU Haven't Failed. Your Hormones Have.
             </h2>
             <p className="text-feminine-gray leading-relaxed">
               You\'ve been fighting an uphill battle because you were addressing symptoms, 

@@ -6,11 +6,11 @@ import { DiagnosisType } from '@/types/quiz'
 import { getQuizState } from '@/lib/quiz-state'
 
 const tips = [
-  "Did you know? Cortisol spikes at 3pm cause belly fat storage. This is why you crave sweets in the afternoon.",
-  "Women store 80% of their fat in problem areas due to estrogen dominance — not lack of willpower.",
-  "Thyroid issues affect 1 in 8 women, causing metabolism to slow by up to 40%.",
-  "Insulin resistance makes your body store calories as fat within 30 minutes of eating sugar.",
-  "Quality sleep reduces cortisol by 30% and can help burn 20% more calories the next day.",
+  "Shocking truth: Your 3pm sugar crash isn't willpower failure. It's cortisol spiking and forcing fat storage around your midsection.",
+  "Estrogen dominance makes women store 80% of fat in hips and thighs. Dieting can't fix hormones. Only hormone targeting can.",
+  "1 in 8 women have undiagnosed thyroid issues. This slows metabolism by 40% and makes weight loss nearly impossible without addressing the root cause.",
+  "Insulin resistance means your body stores sugar as fat within 30 minutes. The solution isn't eating less. It's balancing insulin response.",
+  "Research shows poor sleep increases cortisol by 30% and reduces fat burning by 20%. You could be doing everything right and still gaining weight.",
 ]
 
 const blockTypeTestimonials: Record<string, { quote: string; name: string }> = {
@@ -57,7 +57,7 @@ export default function LoadingScreen({ onComplete, blockType: propBlockType }: 
   const [progress, setProgress] = useState(0)
   const [currentTip, setCurrentTip] = useState(0)
   const [blockType, setBlockType] = useState<string>('cortisol')
-  
+
   useEffect(() => {
     if (propBlockType) {
       setBlockType(propBlockType)
@@ -68,8 +68,9 @@ export default function LoadingScreen({ onComplete, blockType: propBlockType }: 
       }
     }
   }, [propBlockType])
-  
+
   useEffect(() => {
+    // Reduced from 12 seconds (120 * 100ms) to 8 seconds (80 * 100ms)
     const interval = setInterval(() => {
       setProgress(prev => {
         if (prev >= 100) {
@@ -77,21 +78,21 @@ export default function LoadingScreen({ onComplete, blockType: propBlockType }: 
           setTimeout(onComplete, 500)
           return 100
         }
-        return prev + (100 / 120)
+        return prev + (100 / 80)
       })
     }, 100)
-    
+
     return () => clearInterval(interval)
   }, [onComplete])
-  
+
   useEffect(() => {
     const tipInterval = setInterval(() => {
       setCurrentTip(prev => (prev + 1) % tips.length)
     }, 3000)
-    
+
     return () => clearInterval(tipInterval)
   }, [])
-  
+
   return (
     <div className="text-center">
       <motion.div
@@ -99,7 +100,7 @@ export default function LoadingScreen({ onComplete, blockType: propBlockType }: 
         animate={{ opacity: 1 }}
         className="mb-8"
       >
-        <motion.div 
+        <motion.div
           className="w-20 h-20 mx-auto mb-6"
           animate={{ rotate: 360 }}
           transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
@@ -126,21 +127,21 @@ export default function LoadingScreen({ onComplete, blockType: propBlockType }: 
             />
           </svg>
         </motion.div>
-        
+
         <h2 className="font-display text-2xl md:text-3xl mb-4">
           Analyzing Your Responses...
         </h2>
-        
+
         <p className="text-feminine-gray-soft mb-6">
           {progress < 30 && 'Processing your metabolic patterns...'}
           {progress >= 30 && progress < 60 && 'Identifying hormonal imbalances...'}
           {progress >= 60 && progress < 90 && 'Calculating your personalized diagnosis...'}
           {progress >= 90 && 'Almost ready...'}
         </p>
-        
+
         <div className="w-full max-w-xs mx-auto">
           <div className="progress-bar h-2">
-            <motion.div 
+            <motion.div
               className="progress-fill"
               style={{ width: `${progress}%` }}
             />
@@ -162,13 +163,13 @@ export default function LoadingScreen({ onComplete, blockType: propBlockType }: 
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.5 }}
-            className="text-sm text-feminine-charcoal"
+            className="text-sm text-feminine-charcoal font-medium"
           >
             💡 {tips[currentTip]}
           </motion.p>
         </AnimatePresence>
       </motion.div>
-      
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -176,7 +177,7 @@ export default function LoadingScreen({ onComplete, blockType: propBlockType }: 
         className="bg-white rounded-2xl p-6 shadow-lg max-w-sm mx-auto"
       >
         <p className="text-sm text-feminine-gray-soft mb-4">Based on your {blockType.replace('_', ' ')} block type:</p>
-        
+
         <div className="relative h-32">
           <AnimatePresence mode="wait">
             <motion.div
@@ -205,7 +206,7 @@ export default function LoadingScreen({ onComplete, blockType: propBlockType }: 
           </AnimatePresence>
         </div>
       </motion.div>
-      
+
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

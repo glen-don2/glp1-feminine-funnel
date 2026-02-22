@@ -19,10 +19,10 @@ const emotionOptions: { value: DietEmotion; label: string; emoji: string }[] = [
 ]
 
 const severityLabels: Record<EmotionSeverity, string> = {
-  1: 'Mild',
-  2: 'Moderate',
+  1: 'Mildly annoyed',
+  2: 'Moderately bothered',
   3: 'Strong',
-  4: 'Overwhelming',
+  4: 'Completely defeated',
 }
 
 const severityColors: Record<EmotionSeverity, string> = {
@@ -32,16 +32,16 @@ const severityColors: Record<EmotionSeverity, string> = {
   4: 'bg-red-500',
 }
 
-export default function DietEmotionScreen({ 
-  value, 
+export default function DietEmotionScreen({
+  value,
   severityValue,
-  onChange, 
+  onChange,
   onSeverityChange,
-  onNext 
+  onNext
 }: DietEmotionScreenProps) {
   return (
     <div className="text-center">
-      <motion.h2 
+      <motion.h2
         className="question-text"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -49,7 +49,7 @@ export default function DietEmotionScreen({
       >
         How do past diets make you feel?
       </motion.h2>
-      
+
       <div className="grid grid-cols-2 gap-4 mb-8">
         {emotionOptions.map((option, index) => (
           <motion.button
@@ -76,30 +76,25 @@ export default function DietEmotionScreen({
           className="mb-8"
         >
           <p className="font-display text-lg mb-4">How intense is this feeling?</p>
-          
-          <div className="flex justify-between gap-2 mb-3">
+
+          <div className="space-y-2 mb-3">
             {([1, 2, 3, 4] as EmotionSeverity[]).map((level) => (
               <button
                 key={level}
                 onClick={() => onSeverityChange(level)}
-                className={`flex-1 py-3 rounded-xl font-semibold transition-all ${
-                  severityValue === level 
-                    ? `${severityColors[level]} text-white` 
+                className={`w-full py-3 px-4 rounded-xl font-semibold transition-all text-left ${
+                  severityValue === level
+                    ? `${severityColors[level]} text-white`
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
-                {level}
+                {severityLabels[level]}
               </button>
             ))}
           </div>
-          
-          <div className="flex justify-between text-sm text-feminine-gray-soft px-2">
-            <span>Mild</span>
-            <span>Overwhelming</span>
-          </div>
         </motion.div>
       )}
-      
+
       <motion.button
         onClick={onNext}
         disabled={!value || !severityValue}
