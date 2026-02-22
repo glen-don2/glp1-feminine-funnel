@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import { motion } from 'framer-motion'
 
 interface MotivationScreenProps {
@@ -9,14 +8,14 @@ interface MotivationScreenProps {
   onNext: () => void
 }
 
+const identityOptions = [
+  "Someone who feels confident in photos again",
+  "A woman with energy to play with her kids",
+  "The healthiest version of myself",
+  "Someone who doesn't hide behind layers",
+]
+
 export default function MotivationScreen({ value, onChange, onNext }: MotivationScreenProps) {
-  const [localValue, setLocalValue] = useState(value)
-  
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setLocalValue(e.target.value)
-    onChange(e.target.value)
-  }
-  
   return (
     <div className="text-center">
       <motion.h2 
@@ -25,7 +24,7 @@ export default function MotivationScreen({ value, onChange, onNext }: Motivation
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
       >
-        Why do you want this transformation?
+        This year, I AM becoming...
       </motion.h2>
       
       <motion.p 
@@ -34,31 +33,33 @@ export default function MotivationScreen({ value, onChange, onNext }: Motivation
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
       >
-        This is your anchor. Be honest with yourself.
+        Choose the identity that resonates with you most
       </motion.p>
       
-      <motion.div 
-        className="mb-8"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-      >
-        <textarea
-          value={localValue}
-          onChange={handleChange}
-          placeholder="I want to finally feel confident in my own skin, wear the clothes I love, and have the energy to play with my kids..."
-          rows={4}
-          className="w-full"
-        />
-      </motion.div>
+      <div className="space-y-3 mb-8">
+        {identityOptions.map((option, index) => (
+          <motion.button
+            key={option}
+            onClick={() => onChange(option)}
+            className={`card-option w-full text-left ${value === option ? 'card-option-selected' : ''}`}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 * (index + 2) }}
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.99 }}
+          >
+            <span className="font-medium">{option}</span>
+          </motion.button>
+        ))}
+      </div>
       
       <motion.button
         onClick={onNext}
-        disabled={!localValue.trim()}
-        className={`btn-primary ${!localValue.trim() ? 'opacity-50 cursor-not-allowed' : ''}`}
+        disabled={!value}
+        className={`btn-primary ${!value ? 'opacity-50 cursor-not-allowed' : ''}`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.4 }}
+        transition={{ delay: 0.5 }}
       >
         Continue
       </motion.button>

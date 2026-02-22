@@ -1,11 +1,13 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { DietEmotion } from '@/types/quiz'
+import { DietEmotion, EmotionSeverity } from '@/types/quiz'
 
 interface DietEmotionScreenProps {
   value: DietEmotion | null
+  severityValue: EmotionSeverity | null
   onChange: (value: DietEmotion) => void
+  onSeverityChange: (value: EmotionSeverity) => void
   onNext: () => void
 }
 
@@ -16,7 +18,27 @@ const emotionOptions: { value: DietEmotion; label: string; emoji: string }[] = [
   { value: 'hopeless', label: 'Hopeless', emoji: '😢' },
 ]
 
-export default function DietEmotionScreen({ value, onChange, onNext }: DietEmotionScreenProps) {
+const severityLabels: Record<EmotionSeverity, string> = {
+  1: 'Mild',
+  2: 'Moderate',
+  3: 'Strong',
+  4: 'Overwhelming',
+}
+
+const severityColors: Record<EmotionSeverity, string> = {
+  1: 'bg-green-400',
+  2: 'bg-yellow-400',
+  3: 'bg-orange-500',
+  4: 'bg-red-500',
+}
+
+export default function DietEmotionScreen({ 
+  value, 
+  severityValue,
+  onChange, 
+  onSeverityChange,
+  onNext 
+}: DietEmotionScreenProps) {
   return (
     <div className="text-center">
       <motion.h2 
@@ -54,11 +76,43 @@ export default function DietEmotionScreen({ value, onChange, onNext }: DietEmoti
           </motion.button>
         ))}
       </div>
+
+      {value && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="mb-8"
+        >
+          <p className="font-display text-lg mb-4">How intense is this feeling?</p>
+          
+          <div className="flex justify-between gap-2 mb-3">
+            {([1, 2, 3, 4] as EmotionSeverity[]).map((level) => (
+              <button
+                key={level}
+                onClick={() => onSeverityChange(level)}
+                className={`flex-1 py-3 rounded-xl font-semibold transition-all ${
+                  severityValue === level 
+                    ? `${severityColors[level]} text-white` 
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                }`}
+              >
+                {level}
+              </button>
+            ))}
+          </div>
+          
+          <div className="flex justify-between text-sm text-feminine-gray-soft px-2">
+            <span>Mild</span>
+            <span>Overwhelming</span>
+          </div>
+        </motion.div>
+      )}
       
       <motion.button
         onClick={onNext}
-        disabled={!value}
-        className={`btn-primary ${!value ? 'opacity-50 cursor-not-allowed' : ''}`}
+        disabled={!value || !severityValue}
+        className={`btn-primary ${(!value || !severityValue) ? 'opacity-50 cursor-not-allowed' : ''}`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}

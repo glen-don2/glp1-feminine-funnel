@@ -9,22 +9,18 @@ import ProgressIndicator from '@/components/ProgressIndicator'
 import ScreenWrapper from '@/components/ScreenWrapper'
 import AgeScreen from '@/components/screens/AgeScreen'
 import JourneyScreen from '@/components/screens/JourneyScreen'
-import BodyGoalScreen from '@/components/screens/BodyGoalScreen'
+import BodyEnergyScreen from '@/components/screens/BodyEnergyScreen'
 import InvestmentScreen from '@/components/screens/InvestmentScreen'
 import MotivationScreen from '@/components/screens/MotivationScreen'
-import ProblemAreasScreen from '@/components/screens/ProblemAreasScreen'
-import EnergyScreen from '@/components/screens/EnergyScreen'
 import CravingScreen from '@/components/screens/CravingScreen'
-import InfoPivotScreen from '@/components/screens/InfoPivotScreen'
 import DietEmotionScreen from '@/components/screens/DietEmotionScreen'
 import FutureFearScreen from '@/components/screens/FutureFearScreen'
-import FinalAdmissionScreen from '@/components/screens/FinalAdmissionScreen'
-import PressureScreen from '@/components/screens/PressureScreen'
 import MicroCommit1Screen from '@/components/screens/MicroCommit1Screen'
 import MicroCommit2Screen from '@/components/screens/MicroCommit2Screen'
+import EmailCaptureScreen from '@/components/screens/EmailCaptureScreen'
 import LoadingScreen from '@/components/screens/LoadingScreen'
 
-const TOTAL_SCREENS = 15
+const TOTAL_SCREENS = 12
 
 export default function QuizPage() {
   const router = useRouter()
@@ -58,7 +54,7 @@ export default function QuizPage() {
     updateState({ 
       diagnosis,
       completedAt: new Date().toISOString(),
-      currentScreen: 16 
+      currentScreen: 13 
     })
     router.push('/results')
   }, [state, updateState, router])
@@ -96,17 +92,19 @@ export default function QuizPage() {
         )
       case 3:
         return (
-          <BodyGoalScreen
-            value={state.bodyGoal}
-            onChange={(bodyGoal) => updateState({ bodyGoal })}
+          <BodyEnergyScreen
+            bodyGoalValue={state.bodyGoal}
+            energyValue={state.energyPattern}
+            onBodyGoalChange={(bodyGoal) => updateState({ bodyGoal })}
+            onEnergyChange={(energyPattern) => updateState({ energyPattern })}
             onNext={nextScreen}
           />
         )
       case 4:
         return (
-          <InvestmentScreen
-            value={state.investmentLevel}
-            onChange={(investmentLevel) => updateState({ investmentLevel })}
+          <CravingScreen
+            value={state.cravingType}
+            onChange={(cravingType) => updateState({ cravingType })}
             onNext={nextScreen}
           />
         )
@@ -120,39 +118,15 @@ export default function QuizPage() {
         )
       case 6:
         return (
-          <ProblemAreasScreen
-            value={state.problemAreas}
-            onChange={(problemAreas) => updateState({ problemAreas })}
+          <DietEmotionScreen
+            value={state.dietEmotion}
+            severityValue={state.emotionSeverity}
+            onChange={(dietEmotion) => updateState({ dietEmotion })}
+            onSeverityChange={(emotionSeverity) => updateState({ emotionSeverity })}
             onNext={nextScreen}
           />
         )
       case 7:
-        return (
-          <EnergyScreen
-            value={state.energyPattern}
-            onChange={(energyPattern) => updateState({ energyPattern })}
-            onNext={nextScreen}
-          />
-        )
-      case 8:
-        return (
-          <CravingScreen
-            value={state.cravingType}
-            onChange={(cravingType) => updateState({ cravingType })}
-            onNext={nextScreen}
-          />
-        )
-      case 9:
-        return <InfoPivotScreen onNext={nextScreen} />
-      case 10:
-        return (
-          <DietEmotionScreen
-            value={state.dietEmotion}
-            onChange={(dietEmotion) => updateState({ dietEmotion })}
-            onNext={nextScreen}
-          />
-        )
-      case 11:
         return (
           <FutureFearScreen
             value={state.futureFear}
@@ -160,26 +134,20 @@ export default function QuizPage() {
             onNext={nextScreen}
           />
         )
-      case 12:
+      case 8:
         return (
-          <FinalAdmissionScreen
-            value={state.finalAdmissions}
-            onChange={(finalAdmissions) => updateState({ finalAdmissions })}
+          <InvestmentScreen
+            value={state.investmentLevel}
+            onChange={(investmentLevel) => updateState({ investmentLevel })}
             onNext={nextScreen}
           />
         )
-      case 13:
-        return (
-          <PressureScreen
-            value={state.pressureChoice}
-            onChange={(pressureChoice) => updateState({ pressureChoice })}
-            onNext={nextScreen}
-          />
-        )
-      case 14:
+      case 9:
         return (
           <MicroCommit1Screen
-            value={state.microCommit1}
+            finalAdmissionValue={state.finalAdmissions}
+            microCommitValue={state.microCommit1}
+            onFinalAdmissionChange={(finalAdmissions) => updateState({ finalAdmissions })}
             onYes={() => {
               updateState({ microCommit1: true })
               nextScreen()
@@ -190,7 +158,7 @@ export default function QuizPage() {
             }}
           />
         )
-      case 15:
+      case 10:
         return (
           <MicroCommit2Screen
             value={state.microCommit2}
@@ -204,14 +172,22 @@ export default function QuizPage() {
             }}
           />
         )
-      case 16:
-        return <LoadingScreen onComplete={goToResults} />
+      case 11:
+        return (
+          <EmailCaptureScreen
+            value={state.email}
+            onChange={(email) => updateState({ email })}
+            onNext={nextScreen}
+          />
+        )
+      case 12:
+        return <LoadingScreen onComplete={goToResults} blockType={state.diagnosis} />
       default:
         return null
     }
   }
   
-  if (state.currentScreen > 16) {
+  if (state.currentScreen > 12) {
     return null
   }
   

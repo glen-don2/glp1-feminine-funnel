@@ -133,6 +133,102 @@ export function calculateDiagnosis(state: QuizState): DiagnosisType {
   return scores[0].type
 }
 
+export function calculateBlockType(state: QuizState): string {
+  let cortisolScore = 0
+  let estrogenScore = 0
+  let insulinScore = 0
+  let thyroidScore = 0
+  
+  if (state.problemAreas.includes('belly')) {
+    cortisolScore += 2
+    insulinScore += 1
+  }
+  if (state.problemAreas.includes('thighs')) {
+    estrogenScore += 2
+    thyroidScore += 1
+  }
+  if (state.problemAreas.includes('arms')) {
+    thyroidScore += 2
+  }
+  if (state.problemAreas.includes('all_over')) {
+    cortisolScore += 1
+    insulinScore += 1
+  }
+  
+  if (state.energyPattern === 'morning_crash') {
+    cortisolScore += 2
+  } else if (state.energyPattern === 'afternoon_crash') {
+    insulinScore += 2
+    cortisolScore += 1
+  } else if (state.energyPattern === 'all_day_tired') {
+    thyroidScore += 2
+    cortisolScore += 1
+  }
+  
+  if (state.cravingType === 'sugar') {
+    insulinScore += 2
+    cortisolScore += 1
+  } else if (state.cravingType === 'carbs') {
+    insulinScore += 2
+  } else if (state.cravingType === 'late_night') {
+    cortisolScore += 2
+  }
+  
+  if (state.dietEmotion === 'frustrated') {
+    cortisolScore += 1
+  } else if (state.dietEmotion === 'hopeless') {
+    thyroidScore += 1
+    cortisolScore += 1
+  }
+  
+  if (state.futureFear === 'health_decline') {
+    cortisolScore += 1
+    insulinScore += 1
+  } else if (state.futureFear === 'keep_gaining') {
+    insulinScore += 2
+  }
+  
+  if (state.finalAdmissions.includes('belly_fat')) {
+    cortisolScore += 2
+    insulinScore += 1
+  }
+  if (state.finalAdmissions.includes('energy_crashes')) {
+    cortisolScore += 1
+    thyroidScore += 1
+  }
+  if (state.finalAdmissions.includes('cravings')) {
+    insulinScore += 2
+  }
+  if (state.finalAdmissions.includes('scale_stuck')) {
+    thyroidScore += 2
+    estrogenScore += 1
+  }
+  
+  if (state.age === '45-54' || state.age === '55+') {
+    estrogenScore += 2
+    thyroidScore += 1
+  } else if (state.age === '35-44') {
+    estrogenScore += 1
+  }
+  
+  if (state.pressureChoice === 'last_resort') {
+    cortisolScore += 1
+  } else if (state.pressureChoice === 'quick_fix') {
+    cortisolScore += 2
+  }
+  
+  const scores = [
+    { type: 'Cortisol', score: cortisolScore },
+    { type: 'Estrogen', score: estrogenScore },
+    { type: 'Insulin', score: insulinScore },
+    { type: 'Thyroid', score: thyroidScore },
+  ]
+  
+  scores.sort((a, b) => b.score - a.score)
+  
+  return scores[0].type
+}
+
 export const diagnosisContent: Record<DiagnosisType, {
   title: string
   subtitle: string

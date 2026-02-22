@@ -14,6 +14,8 @@ export type CravingType = 'sugar' | 'carbs' | 'salty' | 'late_night'
 
 export type DietEmotion = 'frustrated' | 'ashamed' | 'angry' | 'hopeless'
 
+export type EmotionSeverity = 1 | 2 | 3 | 4
+
 export type FutureFear = 'never_reach_goal' | 'pass_habits_to_kids' | 'keep_gaining' | 'health_decline'
 
 export type FinalAdmission = 'belly_fat' | 'energy_crashes' | 'cravings' | 'scale_stuck'
@@ -33,11 +35,14 @@ export interface QuizState {
   energyPattern: EnergyPattern | null
   cravingType: CravingType | null
   dietEmotion: DietEmotion | null
+  emotionSeverity: EmotionSeverity | null
   futureFear: FutureFear | null
   finalAdmissions: FinalAdmission[]
   pressureChoice: PressureChoice | null
   microCommit1: boolean
   microCommit2: boolean
+  email: string
+  blockType: string | null
   diagnosis: DiagnosisType | null
   completedAt: string | null
 }
@@ -53,11 +58,14 @@ export const initialQuizState: QuizState = {
   energyPattern: null,
   cravingType: null,
   dietEmotion: null,
+  emotionSeverity: null,
   futureFear: null,
   finalAdmissions: [],
   pressureChoice: null,
   microCommit1: false,
   microCommit2: false,
+  email: '',
+  blockType: null,
   diagnosis: null,
   completedAt: null,
 }

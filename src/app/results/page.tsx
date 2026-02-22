@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { getQuizState, diagnosisContent } from '@/lib/quiz-state'
+import { getQuizState, diagnosisContent, calculateBlockType } from '@/lib/quiz-state'
 import { DiagnosisType } from '@/types/quiz'
 
 const testimonials = [
@@ -58,8 +58,10 @@ const faqs = [
 
 export default function ResultsPage() {
   const [diagnosis, setDiagnosis] = useState<DiagnosisType>('mixed')
+  const [blockType, setBlockType] = useState<string>('Cortisol')
   const [loading, setLoading] = useState(true)
   const [spotsLeft, setSpotsLeft] = useState(17)
+  const [viewingNow, setViewingNow] = useState(120)
   const [timeLeft, setTimeLeft] = useState({ hours: 4, minutes: 23 })
   const [openFaq, setOpenFaq] = useState<number | null>(null)
 
@@ -68,6 +70,10 @@ export default function ResultsPage() {
     if (state.diagnosis) {
       setDiagnosis(state.diagnosis)
     }
+    const calculatedBlockType = calculateBlockType(state)
+    setBlockType(calculatedBlockType)
+    setSpotsLeft(Math.floor(Math.random() * (90 - 40) + 40))
+    setViewingNow(Math.floor(Math.random() * (150 - 80) + 80))
     setLoading(false)
 
     // Simulate countdown
@@ -81,7 +87,21 @@ export default function ResultsPage() {
       })
     }, 60000)
 
-    return () => clearInterval(timer)
+    // Auto-decrement spots every 30 seconds
+    const scarcityTimer = setInterval(() => {
+      setSpotsLeft(prev => Math.max(prev - Math.floor(Math.random() * 3 + 1), 1))
+    }, 30000)
+
+    // Random viewing count fluctuation
+    const viewingTimer = setInterval(() => {
+      setViewingNow(prev => Math.max(prev + Math.floor(Math.random() * 10 - 5), 80))
+    }, 5000)
+
+    return () => {
+      clearInterval(timer)
+      clearInterval(scarcityTimer)
+      clearInterval(viewingTimer)
+    }
   }, [])
 
   if (loading) {
@@ -214,18 +234,58 @@ export default function ResultsPage() {
               ))}
             </div>
 
-            {/* Scarcity Bar */}
+            {/* Product Stack Visualization */}
+            <div className="bg-gradient-to-br from-feminine-pink-light/30 to-feminine-rose/10 rounded-2xl p-6 mb-8">
+              <div className="text-center mb-6">
+                <h4 className="font-display text-lg text-feminine-charcoal mb-2">
+                  YOUR GLP-1 FEMININE PROTOCOL INCLUDES:
+                </h4>
+              </div>
+              
+              <div className="flex flex-col items-center mb-6">
+                <div className="w-24 h-32 bg-gradient-to-b from-feminine-rose/20 to-feminine-rose/40 rounded-lg border-2 border-feminine-rose/30 flex items-center justify-center mb-2">
+                  <span className="text-4xl">💊</span>
+                </div>
+              </div>
+              
+              <div className="space-y-3">
+                {[
+                  'GLP-1 Feminine (90 capsules — 30-day supply)',
+                  'The Hormonal Reset Guide (Digital)',
+                  'Meal Timing Protocol (Digital)',
+                  '24/7 Support Access',
+                  'Free Shipping (EU)',
+                ].map((item, idx) => (
+                  <div key={idx} className="flex items-center gap-3">
+                    <span className="w-5 h-5 rounded-full bg-feminine-rose flex items-center justify-center flex-shrink-0">
+                      <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </span>
+                    <span className="text-feminine-charcoal text-sm">{item}</span>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="mt-6 pt-4 border-t border-feminine-rose/20 text-center">
+                <p className="text-feminine-gray line-through">Total Value: €247</p>
+                <p className="text-2xl font-semibold text-feminine-rose">Your Price: Starts at €127</p>
+              </div>
+            </div>
+
+            {/* Dynamic Scarcity Bar */}
             <div className="bg-feminine-charcoal text-white rounded-2xl p-4 mb-6">
+              <p className="text-sm text-feminine-gray-soft mb-2">
+                Based on demand from women with {blockType} blocks in Germany:
+              </p>
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-feminine-gray-soft">Limited spots remaining</p>
-                  <p className="text-2xl font-light">{spotsLeft} spots left</p>
+                  <p className="text-sm text-feminine-gray-soft">Only {spotsLeft} units remaining at launch pricing</p>
+                  <p className="text-2xl font-light text-red-400">⚠️ {spotsLeft} left</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm text-feminine-gray-soft">Offer expires in</p>
-                  <p className="text-2xl font-light">
-                    {String(timeLeft.hours).padStart(2, '0')}:{String(timeLeft.minutes).padStart(2, '0')}
-                  </p>
+                  <p className="text-sm text-feminine-gray-soft">{viewingNow} women viewing now</p>
+                  <p className="text-lg font-light text-feminine-gold">🔥 {viewingNow} active</p>
                 </div>
               </div>
             </div>

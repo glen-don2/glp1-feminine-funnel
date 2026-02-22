@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 
 interface MicroCommit2ScreenProps {
@@ -9,6 +10,26 @@ interface MicroCommit2ScreenProps {
 }
 
 export default function MicroCommit2Screen({ value, onYes, onNo }: MicroCommit2ScreenProps) {
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault()
+      return ''
+    }
+    
+    const handleMouseLeave = (e: MouseEvent) => {
+      if (e.clientY <= 0) {
+      }
+    }
+    
+    window.addEventListener('beforeunload', handleBeforeUnload)
+    document.addEventListener('mouseleave', handleMouseLeave)
+    
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+      document.removeEventListener('mouseleave', handleMouseLeave)
+    }
+  }, [])
+  
   return (
     <div className="text-center">
       <motion.div
@@ -57,27 +78,15 @@ export default function MicroCommit2Screen({ value, onYes, onNo }: MicroCommit2S
         </motion.div>
       </motion.div>
       
-      <div className="space-y-3">
-        <motion.button
-          onClick={onYes}
-          className="btn-primary w-full"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-        >
-          Yes, if there's a solution
-        </motion.button>
-        
-        <motion.button
-          onClick={onNo}
-          className="text-feminine-gray-soft underline text-sm"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.7 }}
-        >
-          I'll keep trying on my own
-        </motion.button>
-      </div>
+      <motion.button
+        onClick={onYes}
+        className="btn-primary w-full"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6 }}
+      >
+        I commit to fixing my hormonal blocks →
+      </motion.button>
     </div>
   )
 }

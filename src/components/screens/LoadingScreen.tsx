@@ -2,50 +2,72 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Testimonial } from '@/types/quiz'
+import { DiagnosisType } from '@/types/quiz'
+import { getQuizState } from '@/lib/quiz-state'
 
-const testimonials: Testimonial[] = [
-  {
-    name: 'Sarah M.',
-    age: 42,
-    location: 'London',
-    image: '',
-    quote: "I'd tried everything. GLP-1 Feminine was the first thing that addressed my cortisol issues.",
-    weightLost: '18 lbs',
-  },
-  {
-    name: 'Jennifer K.',
-    age: 38,
-    location: 'Manchester',
-    image: '',
-    quote: "Finally understood why my belly fat wouldn't budge. Game changer.",
-    weightLost: '24 lbs',
-  },
-  {
-    name: 'Emma T.',
-    age: 51,
-    location: 'Birmingham',
-    image: '',
-    quote: "No more energy crashes. I feel like myself again.",
-    weightLost: '31 lbs',
-  },
-  {
-    name: 'Rebecca L.',
-    age: 45,
-    location: 'Edinburgh',
-    image: '',
-    quote: "My doctor was shocked at my blood work improvements.",
-    weightLost: '27 lbs',
-  },
+const tips = [
+  "Did you know? Cortisol spikes at 3pm cause belly fat storage. This is why you crave sweets in the afternoon.",
+  "Women store 80% of their fat in problem areas due to estrogen dominance — not lack of willpower.",
+  "Thyroid issues affect 1 in 8 women, causing metabolism to slow by up to 40%.",
+  "Insulin resistance makes your body store calories as fat within 30 minutes of eating sugar.",
+  "Quality sleep reduces cortisol by 30% and can help burn 20% more calories the next day.",
 ]
+
+const blockTypeTestimonials: Record<string, { quote: string; name: string }> = {
+  cortisol: {
+    quote: "I discovered my issue was cortisol — not lack of willpower. The stress relief alone was worth it.",
+    name: 'Maria K.',
+  },
+  estrogen: {
+    quote: "Finally understood my hormone fluctuations were sabotaging me. This addressed the real issue.",
+    name: 'Anna L.',
+  },
+  insulin: {
+    quote: "The sugar cravings weren't my fault — it was insulin resistance. Now I'm in control.",
+    name: 'Sophie M.',
+  },
+  thyroid: {
+    quote: "I was tired all the time because of my thyroid, not laziness. Got my energy back!",
+    name: 'Elena R.',
+  },
+  stress_dominant: {
+    quote: "I discovered my issue was cortisol — not lack of willpower. The stress relief alone was worth it.",
+    name: 'Maria K.',
+  },
+  cortisol_estrogen: {
+    quote: "I discovered my issue was cortisol — not lack of willpower. The stress relief alone was worth it.",
+    name: 'Maria K.',
+  },
+  insulin_thyroid: {
+    quote: "The sugar cravings weren't my fault — it was insulin resistance. Now I'm in control.",
+    name: 'Sophie M.',
+  },
+  mixed: {
+    quote: "Finally understood why nothing worked. This addressed ALL my hormonal issues at once.",
+    name: 'Claudia B.',
+  },
+}
 
 interface LoadingScreenProps {
   onComplete: () => void
+  blockType?: DiagnosisType | null
 }
 
-export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
+export default function LoadingScreen({ onComplete, blockType: propBlockType }: LoadingScreenProps) {
   const [progress, setProgress] = useState(0)
-  const [currentTestimonial, setCurrentTestimonial] = useState(0)
+  const [currentTip, setCurrentTip] = useState(0)
+  const [blockType, setBlockType] = useState<string>('cortisol')
+  
+  useEffect(() => {
+    if (propBlockType) {
+      setBlockType(propBlockType)
+    } else {
+      const state = getQuizState()
+      if (state.diagnosis) {
+        setBlockType(state.diagnosis)
+      }
+    }
+  }, [propBlockType])
   
   useEffect(() => {
     const interval = setInterval(() => {
@@ -63,11 +85,11 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
   }, [onComplete])
   
   useEffect(() => {
-    const testimonialInterval = setInterval(() => {
-      setCurrentTestimonial(prev => (prev + 1) % testimonials.length)
+    const tipInterval = setInterval(() => {
+      setCurrentTip(prev => (prev + 1) % tips.length)
     }, 3000)
     
-    return () => clearInterval(testimonialInterval)
+    return () => clearInterval(tipInterval)
   }, [])
   
   return (
@@ -126,6 +148,26 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
           <p className="text-sm text-feminine-gray-soft mt-2">{Math.round(progress)}%</p>
         </div>
       </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
+        className="bg-feminine-pink-light rounded-2xl p-4 max-w-md mx-auto mb-6"
+      >
+        <AnimatePresence mode="wait">
+          <motion.p
+            key={currentTip}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.5 }}
+            className="text-sm text-feminine-charcoal"
+          >
+            💡 {tips[currentTip]}
+          </motion.p>
+        </AnimatePresence>
+      </motion.div>
       
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -133,12 +175,12 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
         transition={{ delay: 0.5 }}
         className="bg-white rounded-2xl p-6 shadow-lg max-w-sm mx-auto"
       >
-        <p className="text-sm text-feminine-gray-soft mb-4">While you wait, see what others are saying:</p>
+        <p className="text-sm text-feminine-gray-soft mb-4">Based on your {blockType.replace('_', ' ')} block type:</p>
         
         <div className="relative h-32">
           <AnimatePresence mode="wait">
             <motion.div
-              key={currentTestimonial}
+              key={blockType}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
@@ -146,32 +188,21 @@ export default function LoadingScreen({ onComplete }: LoadingScreenProps) {
               className="absolute inset-0"
             >
               <p className="italic text-feminine-charcoal mb-3">
-                "{testimonials[currentTestimonial].quote}"
+                "{blockTypeTestimonials[blockType]?.quote || blockTypeTestimonials['cortisol'].quote}"
               </p>
               <div className="flex items-center justify-between">
                 <div className="text-left">
-                  <p className="font-semibold">{testimonials[currentTestimonial].name}</p>
+                  <p className="font-semibold">{blockTypeTestimonials[blockType]?.name || 'Sarah M.'}</p>
                   <p className="text-sm text-feminine-gray-soft">
-                    {testimonials[currentTestimonial].age}, {testimonials[currentTestimonial].location}
+                    Verified Customer
                   </p>
                 </div>
                 <div className="bg-feminine-pink-light text-feminine-pink-dark px-3 py-1 rounded-full text-sm font-semibold">
-                  -{testimonials[currentTestimonial].weightLost}
+                  Real Results
                 </div>
               </div>
             </motion.div>
           </AnimatePresence>
-        </div>
-        
-        <div className="flex justify-center gap-1 mt-4">
-          {testimonials.map((_, index) => (
-            <div
-              key={index}
-              className={`w-2 h-2 rounded-full transition-colors ${
-                index === currentTestimonial ? 'bg-feminine-pink' : 'bg-feminine-pink-light'
-              }`}
-            />
-          ))}
         </div>
       </motion.div>
       
