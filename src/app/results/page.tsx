@@ -234,6 +234,55 @@ export default function ResultsPage() {
               ))}
             </div>
 
+            {/* Visual Comparison Table - Funnel Professor Pattern */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-2xl overflow-hidden border-2 border-feminine-rose/20 mb-8"
+            >
+              <div className="bg-feminine-charcoal text-white p-4 text-center">
+                <h4 className="font-display text-lg">Why Women Are Switching</h4>
+                <p className="text-sm text-feminine-gray-soft">GLP-1 Feminine vs. Prescription Injections</p>
+              </div>
+              
+              <div className="grid grid-cols-3 text-center">
+                {/* Header Row */}
+                <div className="p-3 bg-feminine-cream border-b border-feminine-blush">
+                  <span className="text-xs font-semibold text-feminine-gray">Feature</span>
+                </div>
+                <div className="p-3 bg-feminine-rose/10 border-b border-feminine-blush">
+                  <span className="text-xs font-bold text-feminine-rose">GLP-1 Feminine</span>
+                </div>
+                <div className="p-3 bg-gray-100 border-b border-gray-200">
+                  <span className="text-xs font-semibold text-gray-500">Ozempic/Wegovy</span>
+                </div>
+                
+                {/* Data Rows */}
+                {[
+                  { feature: 'How it works', feminine: 'Natural support', other: 'Synthetic force', icon: '⚙️' },
+                  { feature: 'Side effects', feminine: 'None reported', other: 'Nausea, vomiting', icon: '😷' },
+                  { feature: 'Prescription', feminine: '✓ No', other: '✗ Required', icon: '📋' },
+                  { feature: 'Injections', feminine: '✓ Never', other: '✗ Weekly shots', icon: '💉' },
+                  { feature: 'Monthly cost', feminine: '€127', other: '€300-500', icon: '💶' },
+                  { feature: 'Hormone safe', feminine: '✓ Designed for women', other: '⚠️ Disrupts cycle', icon: '♀️' },
+                ].map((row, idx) => (
+                  <>
+                    <div key={`f-${idx}`} className="p-3 border-b border-feminine-blush flex items-center justify-center gap-2">
+                      <span>{row.icon}</span>
+                      <span className="text-xs text-feminine-gray">{row.feature}</span>
+                    </div>
+                    <div key={`g-${idx}`} className="p-3 border-b border-feminine-blush bg-feminine-rose/5">
+                      <span className="text-xs font-semibold text-green-600">{row.feminine}</span>
+                    </div>
+                    <div key={`o-${idx}`} className="p-3 border-b border-gray-200 bg-gray-50">
+                      <span className="text-xs text-gray-500">{row.other}</span>
+                    </div>
+                  </>
+                ))}
+              </div>
+            </motion.div>
+
             {/* Product Stack Visualization */}
             <div className="bg-gradient-to-br from-feminine-pink-light/30 to-feminine-rose/10 rounded-2xl p-6 mb-8">
               <div className="text-center mb-6">
@@ -242,34 +291,62 @@ export default function ResultsPage() {
                 </h4>
               </div>
               
-              <div className="flex flex-col items-center mb-6">
-                <div className="w-24 h-32 bg-gradient-to-b from-feminine-rose/20 to-feminine-rose/40 rounded-lg border-2 border-feminine-rose/30 flex items-center justify-center mb-2">
-                  <span className="text-4xl">💊</span>
+              {/* Visual product stack */}
+              <div className="flex justify-center mb-6">
+                <div className="relative">
+                  {/* Bottle visual */}
+                  <motion.div
+                    className="w-28 h-40 bg-gradient-to-b from-feminine-rose/30 via-feminine-rose/50 to-feminine-rose/70 rounded-2xl border-2 border-feminine-rose/40 flex items-center justify-center shadow-lg"
+                    whileHover={{ scale: 1.05, rotate: 2 }}
+                    transition={{ type: 'spring', stiffness: 300 }}
+                  >
+                    <div className="text-center">
+                      <span className="text-4xl block mb-2">🌸</span>
+                      <span className="text-xs font-bold text-feminine-rose block">GLP-1</span>
+                      <span className="text-[10px] text-feminine-charcoal">FEMININE</span>
+                    </div>
+                  </motion.div>
+                  {/* Capsule count badge */}
+                  <div className="absolute -top-2 -right-2 w-12 h-12 bg-feminine-gold rounded-full flex items-center justify-center shadow-lg">
+                    <span className="text-xs font-bold text-white text-center leading-tight">90<br/>caps</span>
+                  </div>
                 </div>
               </div>
               
-              <div className="space-y-3">
+              {/* Bonus items with icons */}
+              <div className="grid grid-cols-2 gap-3 mb-6">
                 {[
-                  'GLP-1 Feminine (90 capsules — 30-day supply)',
-                  'The Hormonal Reset Guide (Digital)',
-                  'Meal Timing Protocol (Digital)',
-                  '24/7 Support Access',
-                  'Free Shipping (EU)',
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-3">
-                    <span className="w-5 h-5 rounded-full bg-feminine-rose flex items-center justify-center flex-shrink-0">
-                      <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                    </span>
-                    <span className="text-feminine-charcoal text-sm">{item}</span>
-                  </div>
+                  { item: 'Hormonal Reset Guide', icon: '📱', type: 'Digital' },
+                  { item: 'Meal Timing Protocol', icon: '🍽️', type: 'Digital' },
+                  { item: '24/7 Support Access', icon: '💬', type: 'Community' },
+                  { item: 'Free EU Shipping', icon: '🚚', type: 'Included' },
+                ].map((bonus, idx) => (
+                  <motion.div
+                    key={idx}
+                    className="bg-white/70 rounded-xl p-3 flex items-center gap-2"
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: idx * 0.1 }}
+                  >
+                    <span className="text-xl">{bonus.icon}</span>
+                    <div className="text-left">
+                      <p className="text-xs font-semibold text-feminine-charcoal">{bonus.item}</p>
+                      <p className="text-[10px] text-feminine-gray-soft">{bonus.type}</p>
+                    </div>
+                  </motion.div>
                 ))}
               </div>
               
               <div className="mt-6 pt-4 border-t border-feminine-rose/20 text-center">
-                <p className="text-feminine-gray line-through">Total Value: €247</p>
-                <p className="text-2xl font-semibold text-feminine-rose">Your Price: Starts at €127</p>
+                <div className="flex items-center justify-center gap-4 mb-2">
+                  <p className="text-feminine-gray line-through text-lg">€247</p>
+                  <div className="bg-feminine-rose text-white text-xs font-bold px-2 py-1 rounded-full">
+                    SAVE 49%
+                  </div>
+                </div>
+                <p className="text-3xl font-bold text-feminine-rose">€127<span className="text-lg font-normal text-feminine-gray">/month</span></p>
+                <p className="text-xs text-feminine-gray-soft mt-1">3-month protocol recommended</p>
               </div>
             </div>
 
