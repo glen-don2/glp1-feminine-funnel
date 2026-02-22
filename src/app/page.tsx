@@ -15,13 +15,15 @@ import InvestmentScreen from '@/components/screens/InvestmentScreen'
 import MotivationScreen from '@/components/screens/MotivationScreen'
 import CravingScreen from '@/components/screens/CravingScreen'
 import DietEmotionScreen from '@/components/screens/DietEmotionScreen'
+import EmotionSeverityScreen from '@/components/screens/EmotionSeverityScreen'
 import FutureFearScreen from '@/components/screens/FutureFearScreen'
+import FinalAdmissionScreen from '@/components/screens/FinalAdmissionScreen'
 import MicroCommit1Screen from '@/components/screens/MicroCommit1Screen'
 import MicroCommit2Screen from '@/components/screens/MicroCommit2Screen'
 import EmailCaptureScreen from '@/components/screens/EmailCaptureScreen'
 import LoadingScreen from '@/components/screens/LoadingScreen'
 
-const TOTAL_SCREENS = 13
+const TOTAL_SCREENS = 15
 
 export default function QuizPage() {
   const router = useRouter()
@@ -55,7 +57,7 @@ export default function QuizPage() {
     updateState({ 
       diagnosis,
       completedAt: new Date().toISOString(),
-      currentScreen: 13 
+      currentScreen: 15 
     })
     router.push('/results')
   }, [state, updateState, router])
@@ -127,13 +129,19 @@ export default function QuizPage() {
         return (
           <DietEmotionScreen
             value={state.dietEmotion}
-            severityValue={state.emotionSeverity}
             onChange={(dietEmotion) => updateState({ dietEmotion })}
-            onSeverityChange={(emotionSeverity) => updateState({ emotionSeverity })}
             onNext={nextScreen}
           />
         )
       case 8:
+        return (
+          <EmotionSeverityScreen
+            value={state.emotionSeverity}
+            onChange={(emotionSeverity) => updateState({ emotionSeverity })}
+            onNext={nextScreen}
+          />
+        )
+      case 9:
         return (
           <FutureFearScreen
             value={state.futureFear}
@@ -141,7 +149,7 @@ export default function QuizPage() {
             onNext={nextScreen}
           />
         )
-      case 9:
+      case 10:
         return (
           <InvestmentScreen
             value={state.investmentLevel}
@@ -149,23 +157,21 @@ export default function QuizPage() {
             onNext={nextScreen}
           />
         )
-      case 10:
+      case 11:
         return (
-          <MicroCommit1Screen
-            finalAdmissionValue={state.finalAdmissions}
-            microCommitValue={state.microCommit1}
-            onFinalAdmissionChange={(finalAdmissions) => updateState({ finalAdmissions })}
-            onYes={() => {
-              updateState({ microCommit1: true })
-              nextScreen()
-            }}
-            onNo={() => {
-              updateState({ microCommit1: false })
-              nextScreen()
-            }}
+          <FinalAdmissionScreen
+            value={state.finalAdmissions}
+            onChange={(finalAdmissions) => updateState({ finalAdmissions })}
+            onNext={nextScreen}
           />
         )
-      case 11:
+      case 12:
+        return (
+          <MicroCommit1Screen
+            onYes={nextScreen}
+          />
+        )
+      case 13:
         return (
           <MicroCommit2Screen
             value={state.microCommit2}
@@ -179,7 +185,7 @@ export default function QuizPage() {
             }}
           />
         )
-      case 12:
+      case 14:
         return (
           <EmailCaptureScreen
             value={state.email}
@@ -187,14 +193,14 @@ export default function QuizPage() {
             onNext={nextScreen}
           />
         )
-      case 13:
+      case 15:
         return <LoadingScreen onComplete={goToResults} blockType={state.diagnosis} />
       default:
         return null
     }
   }
   
-  if (state.currentScreen > 13) {
+  if (state.currentScreen > 15) {
     return null
   }
   
