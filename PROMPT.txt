@@ -1,0 +1,101 @@
+Build a complete quiz funnel web application for "GLP-1 Feminine" - a women's hormonal weight loss supplement.
+
+## Project Structure
+Create a multi-page HTML + Tailwind CSS + vanilla JS application:
+- index.html - Landing page with headline "The Real Reason You Can't Lose Weight (It's Not Calories)"
+- quiz.html - 17-screen quiz flow (screens 1-13B as outlined below)
+- results.html - Results page with personalized diagnosis and offer
+
+## Tech Stack
+- Tailwind CSS via CDN (no build step)
+- Vanilla JavaScript for quiz logic
+- localStorage for state persistence
+- GitHub Pages compatible (static files only)
+
+## Quiz Flow (17 screens total)
+
+Screens 1-2: Graduality
+1. Age: "Under 30", "30-39", "40-49", "50+"
+2. Weight loss journey: "Lose then gain back", "Can't lose no matter what", "Slow then plateau", "Given up"
+
+Screens 3-5: Phase 1 (Positive)
+3. Ideal body: "Slim and energized", "Strong and confident", "Comfortable in skin", "Back to 30s"
+4. Motivation: "Feel confident", "Energy for kids", "Health worried", "Tired of invisible"
+5. Investment: "Tried cheap", "I'm worth it", "Can't keep living", "Fix once and for all"
+
+Screens 6-8: Phase 2 (Neutral - Diagnosis builds)
+6. Where weight won't come off: "Belly/midsection", "Hips/thighs", "All over", "Upper body"
+7. Energy: "Crash at 3pm", "Tired all day", "Fine till evening", "Steady"
+8. Cravings: "Before period", "When stressed", "Late night", "Don't crave sugar"
+
+Screen 9: Info Pivot (Educational moment with villain contrast)
+- Show: Why body fights weight loss
+- Explain: Cortisol + estrogen patterns
+- Villain box: Big Pharma/Ozempic contrast
+- CTA: Continue
+
+Screens 10-13: Phase 3 (Negative - Ownership)
+10. Past diet emotion: "Frustrated", "Ashamed", "Angry", "Hopeless"
+11. Future fear: "Never reach goal", "Pass habits to kids", "Keep gaining", "Feel this forever"
+12. Still struggle with: "Belly fat", "Energy crashes", "Cravings", "Scale stuck"
+13. Pressure-release: "Looking for..." "Works with hormones", "Easy long-term", "No extreme diet", "Made for my age"
+
+Screen 13A: Micro-commitment #1 (NEW)
+- "Are you ready to see the truth about your body?"
+- Yes/Not sure options
+
+Screen 13B: Micro-commitment #2 (NEW)
+- "Are you willing to take action if your diagnosis shows a real solution?"
+- Yes/Keep trying alone options
+
+Screen 14: Loading Screen (12 seconds)
+- Progress bar animation
+- Testimonial rotation
+- "Analyzing your hormonal pattern..."
+
+## Scoring Algorithm
+Track 4 block types:
+- Cortisol: belly weight + stress cravings + 3pm crash
+- Estrogen: hips weight + pre-period cravings
+- Insulin: all-over weight + constant cravings
+- Thyroid: upper body + tired all day
+
+Diagnosis rules:
+- Highest 2 scores = primary diagnosis
+- Tie-breaker: Cortisol > Estrogen > Insulin > Thyroid
+
+## Results Page Structure
+1. Validation: "78% of women over 35 have hormonal blocks"
+2. Diagnosis: Show their top 2 block types
+3. Solution: GLP-1 Feminine explanation
+4. Villain contrast table: Ozempic vs Feminine
+5. Offer: 3 packages (1mo €69.95, 3mo €119.85 popular, 5mo €149.75)
+6. Scarcity ladder: Inventory → Time countdown → Social proof
+7. Testimonials
+8. FAQ
+
+## Key Features
+- Smooth fade transitions between screens (300ms)
+- Progress indicator showing "Question X of 15"
+- Mobile-first responsive design
+- LocalStorage saves progress
+- Results page reads URL params for diagnosis type
+
+## Styling
+- Primary: #D946EF (feminine pink/purple)
+- Secondary: #8B5CF6 (soft purple)
+- Accent: #F59E0B (urgency orange)
+- Danger: #EF4444 (scarcity red)
+- Fonts: Inter for body, Playfair Display for headlines
+
+## File Outputs
+Create all files in the current directory:
+- index.html (landing)
+- quiz.html (quiz flow)
+- results.html (offer page)
+- js/quiz.js (quiz logic + scoring)
+- js/transitions.js (animations)
+- js/tracking.js (placeholder for pixel events)
+
+When completely finished, run:
+openclaw system event --text "Done: Built GLP-1 Feminine quiz funnel with 17 screens, Tailwind CSS, scoring algorithm, and results page" --mode now
