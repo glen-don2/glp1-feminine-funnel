@@ -46,7 +46,7 @@ export default function MicroCommit2Screen({ value, onYes }: MicroCommit2ScreenP
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          Your diagnosis is ready.
+          You have completed the assessment.
         </motion.h2>
 
         <motion.p
@@ -55,7 +55,7 @@ export default function MicroCommit2Screen({ value, onYes }: MicroCommit2ScreenP
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
         >
-          We have identified your specific hormonal blocks. Thousands of women with your exact pattern have transformed their bodies using our targeted approach.
+          We are ready to analyze your specific hormonal pattern. Thousands of women with your exact answers have discovered the real reason diets failed them.
         </motion.p>
 
         <motion.div
