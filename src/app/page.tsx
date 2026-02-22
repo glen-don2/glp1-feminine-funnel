@@ -9,7 +9,8 @@ import ProgressIndicator from '@/components/ProgressIndicator'
 import ScreenWrapper from '@/components/ScreenWrapper'
 import AgeScreen from '@/components/screens/AgeScreen'
 import JourneyScreen from '@/components/screens/JourneyScreen'
-import BodyEnergyScreen from '@/components/screens/BodyEnergyScreen'
+import BodyGoalScreen from '@/components/screens/BodyGoalScreen'
+import EnergyScreen from '@/components/screens/EnergyScreen'
 import InvestmentScreen from '@/components/screens/InvestmentScreen'
 import MotivationScreen from '@/components/screens/MotivationScreen'
 import CravingScreen from '@/components/screens/CravingScreen'
@@ -20,7 +21,7 @@ import MicroCommit2Screen from '@/components/screens/MicroCommit2Screen'
 import EmailCaptureScreen from '@/components/screens/EmailCaptureScreen'
 import LoadingScreen from '@/components/screens/LoadingScreen'
 
-const TOTAL_SCREENS = 12
+const TOTAL_SCREENS = 13
 
 export default function QuizPage() {
   const router = useRouter()
@@ -92,15 +93,21 @@ export default function QuizPage() {
         )
       case 3:
         return (
-          <BodyEnergyScreen
-            bodyGoalValue={state.bodyGoal}
-            energyValue={state.energyPattern}
-            onBodyGoalChange={(bodyGoal) => updateState({ bodyGoal })}
-            onEnergyChange={(energyPattern) => updateState({ energyPattern })}
+          <BodyGoalScreen
+            value={state.bodyGoal}
+            onChange={(bodyGoal) => updateState({ bodyGoal })}
             onNext={nextScreen}
           />
         )
       case 4:
+        return (
+          <EnergyScreen
+            value={state.energyPattern}
+            onChange={(energyPattern) => updateState({ energyPattern })}
+            onNext={nextScreen}
+          />
+        )
+      case 5:
         return (
           <CravingScreen
             value={state.cravingType}
@@ -108,7 +115,7 @@ export default function QuizPage() {
             onNext={nextScreen}
           />
         )
-      case 5:
+      case 6:
         return (
           <MotivationScreen
             value={state.motivation}
@@ -116,7 +123,7 @@ export default function QuizPage() {
             onNext={nextScreen}
           />
         )
-      case 6:
+      case 7:
         return (
           <DietEmotionScreen
             value={state.dietEmotion}
@@ -126,7 +133,7 @@ export default function QuizPage() {
             onNext={nextScreen}
           />
         )
-      case 7:
+      case 8:
         return (
           <FutureFearScreen
             value={state.futureFear}
@@ -134,7 +141,7 @@ export default function QuizPage() {
             onNext={nextScreen}
           />
         )
-      case 8:
+      case 9:
         return (
           <InvestmentScreen
             value={state.investmentLevel}
@@ -142,7 +149,7 @@ export default function QuizPage() {
             onNext={nextScreen}
           />
         )
-      case 9:
+      case 10:
         return (
           <MicroCommit1Screen
             finalAdmissionValue={state.finalAdmissions}
@@ -158,7 +165,7 @@ export default function QuizPage() {
             }}
           />
         )
-      case 10:
+      case 11:
         return (
           <MicroCommit2Screen
             value={state.microCommit2}
@@ -172,7 +179,7 @@ export default function QuizPage() {
             }}
           />
         )
-      case 11:
+      case 12:
         return (
           <EmailCaptureScreen
             value={state.email}
@@ -180,14 +187,14 @@ export default function QuizPage() {
             onNext={nextScreen}
           />
         )
-      case 12:
+      case 13:
         return <LoadingScreen onComplete={goToResults} blockType={state.diagnosis} />
       default:
         return null
     }
   }
   
-  if (state.currentScreen > 12) {
+  if (state.currentScreen > 13) {
     return null
   }
   
