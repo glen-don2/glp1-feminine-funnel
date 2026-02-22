@@ -2,7 +2,7 @@ export const quizQuestions = [
   {
     id: 1,
     type: 'graduality',
-    question: "Let's start simple — what's your age range?",
+    question: "Let's start simple. What's your age range?",
     answers: [
       { text: 'Under 30', value: 'under30' },
       { text: '30-39', value: '30-39' },
@@ -16,9 +16,9 @@ export const quizQuestions = [
     question: 'Which best describes your weight loss journey?',
     answers: [
       { text: 'I lose weight but always gain it back', value: 'yo-yo' },
-      { text: 'I am stuck — no matter what I try, nothing works', value: 'stuck' },
+      { text: 'I am stuck. No matter what I try, nothing works', value: 'stuck' },
       { text: 'I lose weight slowly, then hit a plateau', value: 'plateau' },
-      { text: 'I have tried everything — now I am searching for the real reason', value: 'searching' }
+      { text: 'I have tried everything. Now I am searching for the real reason', value: 'searching' }
     ]
   },
   {
@@ -96,9 +96,9 @@ export const quizQuestions = [
       headline: 'Why Your Body Fights Weight Loss',
       villainBox: {
         title: 'THE PROBLEM WITH BIG PHARMA SOLUTIONS',
-        content: 'Ozempic and other GLP-1 injections were designed for diabetics — not women with hormonal weight blocks.\n\nThey do not address your stress hormones. They do not address your cycle. They are one-size-fits-all solutions that ignore YOUR specific pattern.\n\nPlus: needles, doctor visits, side effects, stigma.\n\nYou deserve better.'
+        content: 'Ozempic and other GLP-1 injections were designed for diabetics. Not for women with hormonal weight blocks.\n\nThey do not address your stress hormones. They do not address your cycle. They are one-size-fits-all solutions that ignore YOUR specific pattern.\n\nPlus: needles, doctor visits, side effects, stigma.\n\nYou deserve better.'
       },
-      body: 'Based on your quiz answers, here is what is happening:\n\nYour responses indicate elevated stress hormones from chronic stress, combined with cycle fluctuations.\n\nHere is why this matters:\n\nWhen stress hormones are high, your body stores fat around your midsection as a survival mechanism. It is NOT about calories — it is about stress hormones.\n\nWhen your cycle fluctuates, you get intense cravings and bloating that have nothing to do with willpower.',
+      body: 'Based on your quiz answers, here is what is happening:\n\nYour responses indicate elevated stress hormones from chronic stress, combined with cycle fluctuations.\n\nHere is why this matters:\n\nWhen stress hormones are high, your body stores fat around your midsection as a survival mechanism. It is NOT about calories. It is about stress hormones.\n\nWhen your cycle fluctuates, you get intense cravings and bloating that have nothing to do with willpower.',
       consequence: 'Without addressing these specific hormonal patterns, you will keep losing weight then gaining it back... forever.'
     }
   },
@@ -148,7 +148,7 @@ export const quizQuestions = [
     id: '13A',
     type: 'micro-commitment',
     question: 'Your Diagnosis Is Ready',
-    subtitle: 'You are about to see your personalized hormonal block diagnosis.\n\nThis will explain exactly why diets have not worked for you — and what will actually work instead.',
+    subtitle: 'You are about to see your personalized hormonal block diagnosis.\n\nThis will explain exactly why diets have not worked for you. And what will actually work instead.',
     answers: [
       { text: 'Yes, show me my diagnosis', value: 'yes-ready' },
       { text: 'I am not ready yet', value: 'not-ready' }
@@ -158,7 +158,7 @@ export const quizQuestions = [
     id: '13B',
     type: 'micro-commitment',
     question: 'One More Thing',
-    subtitle: 'Most women discover their hormonal block and think: "So THAT is why nothing worked."\n\nThen they do nothing — and nothing changes.\n\nI am someone who takes action when I see a real solution.',
+    subtitle: 'Most women discover their hormonal block and think: "So THAT is why nothing worked."\n\nThen they do nothing. And nothing changes.\n\nI am someone who takes action when I see a real solution.',
     answers: [
       { text: 'Yes, if there is a real solution, I am in', value: 'yes-action' },
       { text: 'I prefer to keep trying on my own', value: 'on-my-own' }
@@ -171,7 +171,7 @@ export const quizQuestions = [
     duration: 12,
     frames: [
       {
-        testimonial: 'I discovered my issue was stress hormones — not lack of willpower. Within 8 weeks, I lost 19 lbs and finally had energy again. I wish I had found this years ago.',
+        testimonial: 'I discovered my issue was stress hormones. not lack of willpower. Within 8 weeks, I lost 19 lbs and finally had energy again. I wish I had found this years ago.',
         author: 'Sarah M., 44'
       },
       {
@@ -257,10 +257,10 @@ export function calculateDiagnosis(answers) {
 
 function getSingleBlockDescription(block) {
   const descriptions = {
-    cortisol: 'When cortisol is elevated from chronic stress, your body stores fat around your midsection as a survival mechanism. It is NOT about calories — it is about stress hormones.',
+    cortisol: 'When cortisol is elevated from chronic stress, your body stores fat around your midsection as a survival mechanism. It is NOT about calories. It is about stress hormones.',
     estrogen: 'When estrogen fluctuates (especially before your period), you get intense cravings and bloating that have nothing to do with willpower. Your body is working against you.',
-    insulin: 'When insulin is dysregulated, your body stores fat instead of burning it — even when you are eating "healthy." This is why the scale will not move no matter what you try.',
-    thyroid: 'When thyroid function drops, your metabolism slows to a crawl. The result? You eat less, exercise more — and still do not lose weight.'
+    insulin: 'When insulin is dysregulated, your body stores fat instead of burning it. even when you are eating "healthy." This is why the scale will not move no matter what you try.',
+    thyroid: 'When thyroid function drops, your metabolism slows to a crawl. The result? You eat less, exercise more. And still do not lose weight.'
   }
   return descriptions[block]
 }
@@ -269,7 +269,7 @@ function getDualBlockDescription(block1, block2) {
   const descriptions = {
     'cortisol-estrogen': 'When cortisol is high, your body holds onto fat around your belly. When estrogen fluctuates, you get intense cravings and bloating. Together, they create the perfect storm for weight gain.',
     'cortisol-insulin': 'When cortisol is elevated, your body stores fat as a survival mechanism. When insulin is dysregulated, you get energy crashes and constant hunger. You have been fighting both at once.',
-    'cortisol-thyroid': 'When cortisol is high, your body holds onto fat. When thyroid function drops, your metabolism slows. The result? You eat less, exercise more — and still do not lose weight.'
+    'cortisol-thyroid': 'When cortisol is high, your body holds onto fat. When thyroid function drops, your metabolism slows. The result? You eat less, exercise more. And still do not lose weight.'
   }
   const key = [block1, block2].sort().join('-')
   return descriptions[key] || 'Your hormones are working against you on multiple fronts. This is why single-solution diets have not worked.'
