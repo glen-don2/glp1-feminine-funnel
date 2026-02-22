@@ -20,11 +20,12 @@ import DietEmotionScreen from '@/components/screens/DietEmotionScreen'
 import EmotionSeverityScreen from '@/components/screens/EmotionSeverityScreen'
 import InfoPivotScreen from '@/components/screens/InfoPivotScreen'
 import FutureFearScreen from '@/components/screens/FutureFearScreen'
+import PressureReleaseScreen from '@/components/screens/PressureReleaseScreen'
 import FinalAdmissionScreen from '@/components/screens/FinalAdmissionScreen'
 import MicroCommit2Screen from '@/components/screens/MicroCommit2Screen'
 import LoadingScreen from '@/components/screens/LoadingScreen'
 
-const TOTAL_SCREENS = 16
+const TOTAL_SCREENS = 17
 
 export default function QuizPage() {
   const router = useRouter()
@@ -58,7 +59,7 @@ export default function QuizPage() {
     updateState({ 
       diagnosis,
       completedAt: new Date().toISOString(),
-      currentScreen: 16 
+      currentScreen: 17 
     })
     router.push('/results')
   }, [state, updateState, router])
@@ -153,7 +154,7 @@ export default function QuizPage() {
             onNext={nextScreen}
           />
         )
-      // Phase 3: Negative/Ownership (Screens 10-14)
+      // Phase 3: Negative/Ownership (Screens 10-15)
       case 10:
         return (
           <DietEmotionScreen
@@ -186,14 +187,22 @@ export default function QuizPage() {
         )
       case 14:
         return (
+          <PressureReleaseScreen
+            value={state.pressureRelease || ''}
+            onChange={(pressureRelease) => updateState({ pressureRelease })}
+            onNext={nextScreen}
+          />
+        )
+      case 15:
+        return (
           <FinalAdmissionScreen
             value={state.finalAdmission}
             onChange={(finalAdmission) => updateState({ finalAdmission })}
             onNext={nextScreen}
           />
         )
-      // Commitment Screen (15)
-      case 15:
+      // Commitment Screen (16)
+      case 16:
         return (
           <MicroCommit2Screen
             value={state.microCommit2}
@@ -207,8 +216,8 @@ export default function QuizPage() {
             }}
           />
         )
-      // Loading/Summary (16)
-      case 16:
+      // Loading/Summary (17)
+      case 17:
         return <LoadingScreen onComplete={goToResults} blockType={state.diagnosis} />
       default:
         return null

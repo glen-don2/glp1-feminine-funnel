@@ -40,6 +40,7 @@ export interface QuizState {
   futureFear: FutureFear | null
   finalAdmission: FinalAdmission | null
   pressureChoice: PressureChoice | null
+  pressureRelease: string | null
   microCommit1: boolean
   microCommit2: boolean
   email: string
@@ -64,6 +65,7 @@ export const initialQuizState: QuizState = {
   futureFear: null,
   finalAdmission: null,
   pressureChoice: null,
+  pressureRelease: null,
   microCommit1: false,
   microCommit2: false,
   email: '',
