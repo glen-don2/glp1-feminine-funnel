@@ -18,7 +18,7 @@ const identityOptions = [
 export default function MotivationScreen({ value, onChange, onNext }: MotivationScreenProps) {
   return (
     <div className="text-center">
-      <motion.h2 
+      <motion.h2
         className="question-text"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -26,16 +26,16 @@ export default function MotivationScreen({ value, onChange, onNext }: Motivation
       >
         This year, I AM becoming...
       </motion.h2>
-      
-      <motion.p 
+
+      <motion.p
         className="text-feminine-gray-soft mb-8"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
       >
-        Choose the identity that resonates with you most
+        Claim the woman you're becoming
       </motion.p>
-      
+
       <div className="space-y-3 mb-8">
         {identityOptions.map((option, index) => (
           <motion.button
@@ -52,7 +52,7 @@ export default function MotivationScreen({ value, onChange, onNext }: Motivation
           </motion.button>
         ))}
       </div>
-      
+
       <motion.button
         onClick={onNext}
         disabled={!value}

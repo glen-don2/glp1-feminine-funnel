@@ -101,7 +101,7 @@ export default function MicroCommit1Screen({
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
-            Based on your answers, we've identified exactly what's been blocking your progress.
+            You just admitted what's been blocking your progress.
           </motion.p>
           
           <motion.button
@@ -114,18 +114,6 @@ export default function MicroCommit1Screen({
             Yes, I'm ready to fix this
           </motion.button>
         </motion.div>
-      )}
-
-      {finalAdmissionValue.length > 0 && (
-        <motion.button
-          onClick={onNo}
-          className="btn-secondary w-full"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.7 }}
-        >
-          I'm not ready yet
-        </motion.button>
       )}
     </div>
   )

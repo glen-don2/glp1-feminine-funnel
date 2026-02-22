@@ -19,15 +19,15 @@ const cravingOptions: { value: CravingType; label: string; icon: string }[] = [
 export default function CravingScreen({ value, onChange, onNext }: CravingScreenProps) {
   return (
     <div className="text-center">
-      <motion.h2 
+      <motion.h2
         className="question-text"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
       >
-        What type of cravings control you?
+        Which craving pattern owns your willpower?
       </motion.h2>
-      
+
       <div className="grid grid-cols-2 gap-4 mb-8">
         {cravingOptions.map((option, index) => (
           <motion.button
@@ -45,7 +45,7 @@ export default function CravingScreen({ value, onChange, onNext }: CravingScreen
           </motion.button>
         ))}
       </div>
-      
+
       <motion.button
         onClick={onNext}
         disabled={!value}

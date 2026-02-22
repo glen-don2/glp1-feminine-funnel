@@ -36,7 +36,7 @@ export default function BodyEnergyScreen({
 
   return (
     <div className="text-center">
-      <motion.h2 
+      <motion.h2
         className="question-text mb-2"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -44,14 +44,14 @@ export default function BodyEnergyScreen({
       >
         Where do you hold weight + When do you crash?
       </motion.h2>
-      
-      <motion.p 
+
+      <motion.p
         className="text-feminine-gray-soft mb-6"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.15 }}
       >
-        Tell us about your body and energy patterns
+        Your body is sending signals. Which do you recognize?
       </motion.p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
@@ -77,7 +77,7 @@ export default function BodyEnergyScreen({
         ))}
       </div>
 
-      <motion.h3 
+      <motion.h3
         className="font-display text-xl mb-4"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -85,7 +85,7 @@ export default function BodyEnergyScreen({
       >
         When do you experience energy crashes?
       </motion.h3>
-      
+
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
         {energyOptions.map((option, index) => (
           <motion.button
@@ -103,7 +103,7 @@ export default function BodyEnergyScreen({
           </motion.button>
         ))}
       </div>
-      
+
       <motion.button
         onClick={onNext}
         disabled={!canContinue}

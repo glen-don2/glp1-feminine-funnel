@@ -50,15 +50,6 @@ export default function DietEmotionScreen({
         How do past diets make you feel?
       </motion.h2>
       
-      <motion.p 
-        className="text-feminine-gray-soft mb-8"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-      >
-        It's okay to feel this way. You're not alone.
-      </motion.p>
-      
       <div className="grid grid-cols-2 gap-4 mb-8">
         {emotionOptions.map((option, index) => (
           <motion.button

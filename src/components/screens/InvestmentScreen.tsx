@@ -19,7 +19,7 @@ const investmentOptions: { value: InvestmentLevel; label: string }[] = [
 export default function InvestmentScreen({ value, onChange, onNext }: InvestmentScreenProps) {
   return (
     <div className="text-center">
-      <motion.h2 
+      <motion.h2
         className="question-text"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -27,16 +27,16 @@ export default function InvestmentScreen({ value, onChange, onNext }: Investment
       >
         What's your investment mindset for your health?
       </motion.h2>
-      
-      <motion.p 
+
+      <motion.p
         className="text-feminine-gray-soft mb-8"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
       >
-        We'll match solutions to your comfort level
+        What are you willing to invest to reclaim your body?
       </motion.p>
-      
+
       <div className="space-y-3 mb-8">
         {investmentOptions.map((option, index) => (
           <motion.label
@@ -59,7 +59,7 @@ export default function InvestmentScreen({ value, onChange, onNext }: Investment
           </motion.label>
         ))}
       </div>
-      
+
       <motion.button
         onClick={onNext}
         disabled={!value}

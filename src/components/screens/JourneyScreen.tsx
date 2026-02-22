@@ -10,11 +10,11 @@ interface JourneyScreenProps {
 }
 
 const journeyOptions: { value: JourneyDuration; label: string }[] = [
-  { value: 'just_started', label: 'Just started' },
-  { value: '6_months', label: '6+ months' },
-  { value: '1_year', label: '1+ years' },
-  { value: '2_years', label: '2+ years' },
-  { value: '5_years', label: '5+ years' },
+  { value: 'just_started', label: 'Ending it now' },
+  { value: '6_months', label: '6+ months of suffering' },
+  { value: '1_year', label: '1+ years of hiding' },
+  { value: '2_years', label: '2+ years of struggle' },
+  { value: '5_years', label: '5+ years of pain' },
 ]
 
 export default function JourneyScreen({ value, onChange, onNext }: JourneyScreenProps) {

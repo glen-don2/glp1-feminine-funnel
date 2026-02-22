@@ -47,13 +47,13 @@ export default function EmailCaptureScreen({ value, onChange, onNext }: EmailCap
           <span className="text-3xl">✉️</span>
         </motion.div>
         
-        <motion.h2 
+        <motion.h2
           className="font-display text-2xl md:text-3xl mb-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          Before we reveal your hormonal block type...
+          Your diagnosis is ready. Where should we send it?
         </motion.h2>
         
         <motion.p 

@@ -29,13 +29,13 @@ export default function AgeScreen({ value, onChange, onNext }: AgeScreenProps) {
         What's your age range?
       </motion.h2>
       
-      <motion.p 
+      <motion.p
         className="text-feminine-gray-soft mb-8"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
       >
-        This helps us personalize your results
+        Your age determines which hormonal phase you're in
       </motion.p>
       
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
