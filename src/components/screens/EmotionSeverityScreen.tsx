@@ -10,10 +10,10 @@ interface EmotionSeverityScreenProps {
 }
 
 const severityOptions: { value: EmotionSeverity; label: string }[] = [
-  { value: 1, label: 'Mildly annoyed' },
-  { value: 2, label: 'Moderately bothered' },
-  { value: 3, label: 'Strong' },
-  { value: 4, label: 'Completely defeated' },
+  { value: 1, label: 'It bothers me sometimes' },
+  { value: 2, label: 'It weighs on me often' },
+  { value: 3, label: 'It affects my daily life' },
+  { value: 4, label: 'It defines how I see myself' },
 ]
 
 export default function EmotionSeverityScreen({ value, onChange, onNext }: EmotionSeverityScreenProps) {
@@ -25,8 +25,17 @@ export default function EmotionSeverityScreen({ value, onChange, onNext }: Emoti
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
       >
-        How intense is this feeling?
+        How deep does this feeling go?
       </motion.h2>
+
+      <motion.p
+        className="text-feminine-gray-soft mb-8"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2 }}
+      >
+        Be honest about the weight you carry
+      </motion.p>
 
       <div className="space-y-3 mb-8">
         {severityOptions.map((option, index) => (

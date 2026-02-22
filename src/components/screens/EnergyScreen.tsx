@@ -11,7 +11,7 @@ interface EnergyScreenProps {
 
 const energyOptions: { value: EnergyPattern; label: string; icon: string }[] = [
   { value: 'morning_crash', label: 'Morning crash', icon: '🌅' },
-  { value: 'afternoon_crash', label: 'Afternoon crash', icon: '☀️' },
+  { value: 'afternoon_crash', label: 'Afternoon crash at 3pm', icon: '☀️' },
   { value: 'evening_crash', label: 'Evening crash', icon: '🌙' },
   { value: 'all_day_tired', label: 'All day tired', icon: '😓' },
 ]
@@ -34,7 +34,7 @@ export default function EnergyScreen({ value, onChange, onNext }: EnergyScreenPr
         animate={{ opacity: 1 }}
         transition={{ delay: 0.15 }}
       >
-        Your energy pattern reveals the real problem
+        Your body is sending signals
       </motion.p>
 
       <div className="grid grid-cols-2 gap-3 mb-8">

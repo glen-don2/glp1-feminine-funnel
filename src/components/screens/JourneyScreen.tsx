@@ -9,12 +9,12 @@ interface JourneyScreenProps {
   onNext: () => void
 }
 
-const journeyOptions: { value: JourneyDuration; label: string; emoji: string }[] = [
-  { value: 'just_started', label: 'Ending it now', emoji: '🛑' },
-  { value: '6_months', label: '6+ months of suffering', emoji: '😔' },
-  { value: '1_year', label: '1+ years of hiding', emoji: '🙈' },
-  { value: '2_years', label: '2+ years of struggle', emoji: '😤' },
-  { value: '5_years', label: '5+ years of pain', emoji: '😢' },
+const journeyOptions: { value: JourneyDuration; label: string }[] = [
+  { value: 'just_started', label: 'Just getting started' },
+  { value: '6_months', label: '6+ months' },
+  { value: '1_year', label: '1+ years' },
+  { value: '2_years', label: '2+ years' },
+  { value: '5_years', label: '5+ years of struggle' },
 ]
 
 export default function JourneyScreen({ value, onChange, onNext }: JourneyScreenProps) {
@@ -26,7 +26,7 @@ export default function JourneyScreen({ value, onChange, onNext }: JourneyScreen
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
       >
-        How long have you been on your weight loss journey?
+        How long have you been trying to lose weight?
       </motion.h2>
 
       <div className="grid grid-cols-1 gap-3 mb-8">
@@ -34,14 +34,13 @@ export default function JourneyScreen({ value, onChange, onNext }: JourneyScreen
           <motion.button
             key={option.value}
             onClick={() => onChange(option.value)}
-            className={`card-option w-full text-left flex items-center gap-4 ${value === option.value ? 'card-option-selected' : ''}`}
+            className={`card-option w-full text-left ${value === option.value ? 'card-option-selected' : ''}`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 * (index + 2) }}
             whileHover={{ scale: 1.01 }}
             whileTap={{ scale: 0.99 }}
           >
-            <span className="text-3xl">{option.emoji}</span>
             <span className="font-semibold text-lg">{option.label}</span>
           </motion.button>
         ))}

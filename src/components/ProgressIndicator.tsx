@@ -8,7 +8,9 @@ interface ProgressIndicatorProps {
 }
 
 export default function ProgressIndicator({ currentScreen, totalScreens }: ProgressIndicatorProps) {
-  const progress = Math.round((currentScreen / totalScreens) * 100)
+  // Calculate progress based on completed screens
+  // Screen 1 = just started, Screen 15 = 100%
+  const progress = Math.round(((currentScreen - 1) / (totalScreens - 1)) * 100)
   
   return (
     <div className="w-full max-w-md mx-auto mb-8">

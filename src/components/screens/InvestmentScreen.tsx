@@ -10,10 +10,10 @@ interface InvestmentScreenProps {
 }
 
 const investmentOptions: { value: InvestmentLevel; label: string }[] = [
-  { value: 'under_50', label: 'Under €50/month' },
-  { value: '50_100', label: '€50-100/month' },
-  { value: '100_200', label: '€100-200/month' },
-  { value: 'whatever_it_takes', label: 'Whatever it takes' },
+  { value: 'under_50', label: 'I am worth investing in' },
+  { value: '50_100', label: 'I deserve a solution that actually works' },
+  { value: '100_200', label: 'I cannot keep living like this' },
+  { value: 'whatever_it_takes', label: 'I am ready to fix this once and for all' },
 ]
 
 export default function InvestmentScreen({ value, onChange, onNext }: InvestmentScreenProps) {
@@ -25,7 +25,7 @@ export default function InvestmentScreen({ value, onChange, onNext }: Investment
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
       >
-        What's your investment mindset for your health?
+        I am ready to invest because...
       </motion.h2>
 
       <motion.p
@@ -34,29 +34,23 @@ export default function InvestmentScreen({ value, onChange, onNext }: Investment
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
       >
-        What are you willing to invest to reclaim your body?
+        Own your commitment to yourself
       </motion.p>
 
       <div className="space-y-3 mb-8">
         {investmentOptions.map((option, index) => (
-          <motion.label
+          <motion.button
             key={option.value}
-            className={`card-option flex items-center gap-4 cursor-pointer ${value === option.value ? 'card-option-selected' : ''}`}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
+            onClick={() => onChange(option.value)}
+            className={`card-option w-full text-left ${value === option.value ? 'card-option-selected' : ''}`}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 * (index + 2) }}
             whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.99 }}
           >
-            <input
-              type="radio"
-              name="investment"
-              value={option.value}
-              checked={value === option.value}
-              onChange={() => onChange(option.value)}
-              className="w-5 h-5"
-            />
             <span className="font-medium">{option.label}</span>
-          </motion.label>
+          </motion.button>
         ))}
       </div>
 

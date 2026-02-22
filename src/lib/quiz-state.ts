@@ -43,22 +43,21 @@ export function calculateDiagnosis(state: QuizState): DiagnosisType {
   let insulinScore = 0
   let thyroidScore = 0
   
-  if (state.problemAreas.includes('belly')) {
+  // Problem area scoring
+  if (state.problemArea === 'belly') {
     cortisolScore += 2
     insulinScore += 1
-  }
-  if (state.problemAreas.includes('thighs')) {
+  } else if (state.problemArea === 'thighs') {
     estrogenScore += 2
     thyroidScore += 1
-  }
-  if (state.problemAreas.includes('arms')) {
+  } else if (state.problemArea === 'arms') {
     thyroidScore += 2
-  }
-  if (state.problemAreas.includes('all_over')) {
+  } else if (state.problemArea === 'all_over') {
     cortisolScore += 1
     insulinScore += 1
   }
   
+  // Energy pattern scoring
   if (state.energyPattern === 'morning_crash') {
     cortisolScore += 2
   } else if (state.energyPattern === 'afternoon_crash') {
@@ -69,6 +68,7 @@ export function calculateDiagnosis(state: QuizState): DiagnosisType {
     cortisolScore += 1
   }
   
+  // Craving type scoring
   if (state.cravingType === 'sugar') {
     insulinScore += 2
     cortisolScore += 1
@@ -78,6 +78,21 @@ export function calculateDiagnosis(state: QuizState): DiagnosisType {
     cortisolScore += 2
   }
   
+  // Stress pattern scoring
+  if (state.stressPattern === 'stress_eat') {
+    cortisolScore += 2
+    insulinScore += 1
+  } else if (state.stressPattern === 'stress_skip') {
+    cortisolScore += 1
+    thyroidScore += 1
+  } else if (state.stressPattern === 'stress_crave') {
+    insulinScore += 2
+  } else if (state.stressPattern === 'stress_sleepless') {
+    cortisolScore += 2
+    thyroidScore += 1
+  }
+  
+  // Diet emotion scoring
   if (state.dietEmotion === 'frustrated') {
     cortisolScore += 1
   } else if (state.dietEmotion === 'hopeless') {
@@ -85,6 +100,7 @@ export function calculateDiagnosis(state: QuizState): DiagnosisType {
     cortisolScore += 1
   }
   
+  // Future fear scoring
   if (state.futureFear === 'health_decline') {
     cortisolScore += 1
     insulinScore += 1
@@ -92,22 +108,21 @@ export function calculateDiagnosis(state: QuizState): DiagnosisType {
     insulinScore += 2
   }
   
-  if (state.finalAdmissions.includes('belly_fat')) {
+  // Final admission scoring
+  if (state.finalAdmission === 'belly_fat') {
     cortisolScore += 2
     insulinScore += 1
-  }
-  if (state.finalAdmissions.includes('energy_crashes')) {
+  } else if (state.finalAdmission === 'energy_crashes') {
     cortisolScore += 1
     thyroidScore += 1
-  }
-  if (state.finalAdmissions.includes('cravings')) {
+  } else if (state.finalAdmission === 'cravings') {
     insulinScore += 2
-  }
-  if (state.finalAdmissions.includes('scale_stuck')) {
+  } else if (state.finalAdmission === 'scale_stuck') {
     thyroidScore += 2
     estrogenScore += 1
   }
   
+  // Age scoring
   if (state.age === '45-54' || state.age === '55+') {
     estrogenScore += 2
     thyroidScore += 1
@@ -115,12 +130,7 @@ export function calculateDiagnosis(state: QuizState): DiagnosisType {
     estrogenScore += 1
   }
   
-  if (state.pressureChoice === 'last_resort') {
-    cortisolScore += 1
-  } else if (state.pressureChoice === 'quick_fix') {
-    cortisolScore += 2
-  }
-  
+  // Calculate diagnosis type
   const scores = [
     { type: 'cortisol_estrogen' as DiagnosisType, score: cortisolScore + estrogenScore },
     { type: 'insulin_thyroid' as DiagnosisType, score: insulinScore + thyroidScore },
@@ -139,18 +149,15 @@ export function calculateBlockType(state: QuizState): string {
   let insulinScore = 0
   let thyroidScore = 0
   
-  if (state.problemAreas.includes('belly')) {
+  if (state.problemArea === 'belly') {
     cortisolScore += 2
     insulinScore += 1
-  }
-  if (state.problemAreas.includes('thighs')) {
+  } else if (state.problemArea === 'thighs') {
     estrogenScore += 2
     thyroidScore += 1
-  }
-  if (state.problemAreas.includes('arms')) {
+  } else if (state.problemArea === 'arms') {
     thyroidScore += 2
-  }
-  if (state.problemAreas.includes('all_over')) {
+  } else if (state.problemArea === 'all_over') {
     cortisolScore += 1
     insulinScore += 1
   }
@@ -174,6 +181,19 @@ export function calculateBlockType(state: QuizState): string {
     cortisolScore += 2
   }
   
+  if (state.stressPattern === 'stress_eat') {
+    cortisolScore += 2
+    insulinScore += 1
+  } else if (state.stressPattern === 'stress_skip') {
+    cortisolScore += 1
+    thyroidScore += 1
+  } else if (state.stressPattern === 'stress_crave') {
+    insulinScore += 2
+  } else if (state.stressPattern === 'stress_sleepless') {
+    cortisolScore += 2
+    thyroidScore += 1
+  }
+  
   if (state.dietEmotion === 'frustrated') {
     cortisolScore += 1
   } else if (state.dietEmotion === 'hopeless') {
@@ -188,18 +208,15 @@ export function calculateBlockType(state: QuizState): string {
     insulinScore += 2
   }
   
-  if (state.finalAdmissions.includes('belly_fat')) {
+  if (state.finalAdmission === 'belly_fat') {
     cortisolScore += 2
     insulinScore += 1
-  }
-  if (state.finalAdmissions.includes('energy_crashes')) {
+  } else if (state.finalAdmission === 'energy_crashes') {
     cortisolScore += 1
     thyroidScore += 1
-  }
-  if (state.finalAdmissions.includes('cravings')) {
+  } else if (state.finalAdmission === 'cravings') {
     insulinScore += 2
-  }
-  if (state.finalAdmissions.includes('scale_stuck')) {
+  } else if (state.finalAdmission === 'scale_stuck') {
     thyroidScore += 2
     estrogenScore += 1
   }
@@ -209,12 +226,6 @@ export function calculateBlockType(state: QuizState): string {
     thyroidScore += 1
   } else if (state.age === '35-44') {
     estrogenScore += 1
-  }
-  
-  if (state.pressureChoice === 'last_resort') {
-    cortisolScore += 1
-  } else if (state.pressureChoice === 'quick_fix') {
-    cortisolScore += 2
   }
   
   const scores = [
@@ -241,7 +252,7 @@ export const diagnosisContent: Record<DiagnosisType, {
     subtitle: 'Your body is holding onto weight as a protective response',
     description: 'Your quiz responses indicate that chronic stress and hormonal fluctuations are creating a perfect storm for weight retention. When cortisol remains elevated, it signals your body to store fat—particularly around the midsection—while disrupting estrogen metabolism.',
     symptoms: [
-      'Stubborn belly fat that won\'t budge',
+      'Stubborn belly fat that will not budge',
       'Energy crashes throughout the day',
       'Difficulty sleeping or staying asleep',
       'Mood swings and irritability',
@@ -252,15 +263,15 @@ export const diagnosisContent: Record<DiagnosisType, {
   insulin_thyroid: {
     title: 'Insulin-Thyroid Dysfunction',
     subtitle: 'Your metabolism is running on low power mode',
-    description: 'Your responses suggest a metabolic slowdown caused by insulin resistance and suboptimal thyroid function. This combination makes weight loss feel nearly impossible because your body isn\'t efficiently converting food into energy.',
+    description: 'Your responses suggest a metabolic slowdown caused by insulin resistance and suboptimal thyroid function. This combination makes weight loss feel nearly impossible because your body is not efficiently converting food into energy.',
     symptoms: [
-      'Weight gain despite eating "healthy"',
+      'Weight gain despite eating healthy',
       'Constant fatigue and brain fog',
       'Cold hands and feet',
       'Carb and sugar cravings',
       'Slow digestion and bloating',
     ],
-    rootCause: 'Your cells have become resistant to insulin\'s signals, while your thyroid is underperforming, creating a metabolic bottleneck.',
+    rootCause: 'Your cells have become resistant to insulin signals, while your thyroid is underperforming, creating a metabolic bottleneck.',
   },
   mixed: {
     title: 'Multi-Factor Metabolic Block',
@@ -286,6 +297,6 @@ export const diagnosisContent: Record<DiagnosisType, {
       'Sleep disturbances',
       'Emotional eating patterns',
     ],
-    rootCause: 'Your fight-or-flight response is chronically activated, flooding your system with cortisol and blocking your body\'s natural fat-burning ability.',
+    rootCause: 'Your fight-or-flight response is chronically activated, flooding your system with cortisol and blocking your bodys natural fat-burning ability.',
   },
 }

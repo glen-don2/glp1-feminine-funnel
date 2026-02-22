@@ -31,13 +31,14 @@ export interface QuizState {
   bodyGoal: BodyGoal | null
   investmentLevel: InvestmentLevel | null
   motivation: string
-  problemAreas: BodyArea[]
+  problemArea: BodyArea | null
   energyPattern: EnergyPattern | null
   cravingType: CravingType | null
+  stressPattern: string | null
   dietEmotion: DietEmotion | null
   emotionSeverity: EmotionSeverity | null
   futureFear: FutureFear | null
-  finalAdmissions: FinalAdmission[]
+  finalAdmission: FinalAdmission | null
   pressureChoice: PressureChoice | null
   microCommit1: boolean
   microCommit2: boolean
@@ -54,13 +55,14 @@ export const initialQuizState: QuizState = {
   bodyGoal: null,
   investmentLevel: null,
   motivation: '',
-  problemAreas: [],
+  problemArea: null,
   energyPattern: null,
   cravingType: null,
+  stressPattern: null,
   dietEmotion: null,
   emotionSeverity: null,
   futureFear: null,
-  finalAdmissions: [],
+  finalAdmission: null,
   pressureChoice: null,
   microCommit1: false,
   microCommit2: false,

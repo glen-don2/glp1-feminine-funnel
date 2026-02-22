@@ -9,11 +9,11 @@ interface BodyGoalScreenProps {
   onNext: () => void
 }
 
-const bodyGoalOptions: { value: BodyGoal; label: string; description: string; emoji: string }[] = [
-  { value: 'slim_toned', label: 'Slim & Toned', description: 'Lean, elegant curves', emoji: '✨' },
-  { value: 'strong_athletic', label: 'Strong & Athletic', description: 'Fit and powerful', emoji: '💪' },
-  { value: 'curvy_confident', label: 'Curvy & Confident', description: 'Embrace your curves', emoji: '👗' },
-  { value: 'healthy_energetic', label: 'Healthy & Energetic', description: 'Feel your best', emoji: '🌿' },
+const bodyGoalOptions: { value: BodyGoal; label: string; emoji: string }[] = [
+  { value: 'slim_toned', label: 'Slim, toned, and full of energy', emoji: '✨' },
+  { value: 'strong_athletic', label: 'Strong, fit, and confident', emoji: '💪' },
+  { value: 'curvy_confident', label: 'Curvy and comfortable in my skin', emoji: '👗' },
+  { value: 'healthy_energetic', label: 'Back to how I looked in my 30s', emoji: '🌟' },
 ]
 
 export default function BodyGoalScreen({ value, onChange, onNext }: BodyGoalScreenProps) {
@@ -25,7 +25,7 @@ export default function BodyGoalScreen({ value, onChange, onNext }: BodyGoalScre
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
       >
-        What does your ideal body look like?
+        My dream body is...
       </motion.h2>
 
       <motion.p
@@ -34,7 +34,7 @@ export default function BodyGoalScreen({ value, onChange, onNext }: BodyGoalScre
         animate={{ opacity: 1 }}
         transition={{ delay: 0.15 }}
       >
-        Pick the version of you that feels right
+        Visualize the woman you are becoming
       </motion.p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
@@ -53,7 +53,6 @@ export default function BodyGoalScreen({ value, onChange, onNext }: BodyGoalScre
               <span className="text-3xl">{option.emoji}</span>
               <div>
                 <div className="font-semibold text-lg">{option.label}</div>
-                <div className="text-sm text-feminine-gray-soft">{option.description}</div>
               </div>
             </div>
           </motion.button>

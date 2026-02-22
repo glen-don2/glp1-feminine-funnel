@@ -12,8 +12,8 @@ interface CravingScreenProps {
 const cravingOptions: { value: CravingType; label: string; icon: string }[] = [
   { value: 'sugar', label: 'Sugar', icon: '🍬' },
   { value: 'carbs', label: 'Carbs', icon: '🍞' },
-  { value: 'salty', label: 'Salty', icon: '🧂' },
-  { value: 'late_night', label: 'Late night', icon: '🌙' },
+  { value: 'salty', label: 'Salty snacks', icon: '🧂' },
+  { value: 'late_night', label: 'Late night eating', icon: '🌙' },
 ]
 
 export default function CravingScreen({ value, onChange, onNext }: CravingScreenProps) {
@@ -25,8 +25,17 @@ export default function CravingScreen({ value, onChange, onNext }: CravingScreen
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
       >
-        Which craving pattern owns your willpower?
+        What does your body crave most?
       </motion.h2>
+
+      <motion.p
+        className="text-feminine-gray-soft mb-8"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.15 }}
+      >
+        Your cravings reveal your hormonal pattern
+      </motion.p>
 
       <div className="grid grid-cols-2 gap-4 mb-8">
         {cravingOptions.map((option, index) => (

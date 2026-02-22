@@ -9,24 +9,17 @@ interface MicroCommit2ScreenProps {
   onNo: () => void
 }
 
-export default function MicroCommit2Screen({ value, onYes, onNo }: MicroCommit2ScreenProps) {
+export default function MicroCommit2Screen({ value, onYes }: MicroCommit2ScreenProps) {
   useEffect(() => {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
       e.preventDefault()
       return ''
     }
 
-    const handleMouseLeave = (e: MouseEvent) => {
-      if (e.clientY <= 0) {
-      }
-    }
-
     window.addEventListener('beforeunload', handleBeforeUnload)
-    document.addEventListener('mouseleave', handleMouseLeave)
 
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload)
-      document.removeEventListener('mouseleave', handleMouseLeave)
     }
   }, [])
 
@@ -53,7 +46,7 @@ export default function MicroCommit2Screen({ value, onYes, onNo }: MicroCommit2S
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          One more commitment...
+          Your diagnosis is ready.
         </motion.h2>
 
         <motion.p
@@ -62,7 +55,7 @@ export default function MicroCommit2Screen({ value, onYes, onNo }: MicroCommit2S
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
         >
-          If we show you a solution that addresses your specific metabolic pattern. No injections. No rebound weight. Just results. Would you be open to learning more?
+          If we show you a solution that addresses your specific hormonal pattern. No injections. No rebound weight. Just results. Are you open to seeing it?
         </motion.p>
 
         <motion.div
@@ -72,7 +65,7 @@ export default function MicroCommit2Screen({ value, onYes, onNo }: MicroCommit2S
           transition={{ delay: 0.5 }}
         >
           <p className="text-sm italic text-feminine-gray-soft">
-            "I commit to exploring a solution that could finally give me the body I deserve."
+            "I commit to at least exploring a solution that could give me the body I deserve."
           </p>
         </motion.div>
       </motion.div>
@@ -84,7 +77,7 @@ export default function MicroCommit2Screen({ value, onYes, onNo }: MicroCommit2S
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6 }}
       >
-        I commit to fixing my hormonal blocks →
+        Yes. Show me my diagnosis.
       </motion.button>
     </div>
   )

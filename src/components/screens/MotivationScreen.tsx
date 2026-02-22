@@ -9,10 +9,10 @@ interface MotivationScreenProps {
 }
 
 const identityOptions = [
-  "Someone who feels confident in photos again",
-  "A woman with energy to play with her kids",
-  "The healthiest version of myself",
-  "Someone who doesn't hide behind layers",
+  "A woman who feels confident in photos again",
+  "Someone with energy to keep up with my kids",
+  "The healthiest, most vibrant version of myself",
+  "Someone who doesn't hide behind layers anymore",
 ]
 
 export default function MotivationScreen({ value, onChange, onNext }: MotivationScreenProps) {
@@ -33,7 +33,7 @@ export default function MotivationScreen({ value, onChange, onNext }: Motivation
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
       >
-        Claim the woman you're becoming
+        Claim the identity you are stepping into
       </motion.p>
 
       <div className="space-y-3 mb-8">

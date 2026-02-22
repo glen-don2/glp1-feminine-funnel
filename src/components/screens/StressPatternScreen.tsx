@@ -1,44 +1,43 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { FinalAdmission } from '@/types/quiz'
 
-interface FinalAdmissionScreenProps {
-  value: FinalAdmission | null
-  onChange: (value: FinalAdmission) => void
+interface StressPatternScreenProps {
+  value: string | null
+  onChange: (value: string) => void
   onNext: () => void
 }
 
-const admissionOptions: { value: FinalAdmission; label: string }[] = [
-  { value: 'belly_fat', label: 'Belly fat that will not budge' },
-  { value: 'energy_crashes', label: 'Energy crashes that ruin my day' },
-  { value: 'cravings', label: 'Cravings I cannot control' },
-  { value: 'scale_stuck', label: 'The scale not moving no matter what' },
+const stressOptions = [
+  { value: 'stress_eat', label: 'Reach for sugar or carbs', emoji: '🍫' },
+  { value: 'stress_skip', label: 'Skip meals entirely', emoji: '⏭️' },
+  { value: 'stress_crave', label: 'Crave comfort food', emoji: '🍕' },
+  { value: 'stress_sleepless', label: 'Cannot sleep properly', emoji: '😴' },
 ]
 
-export default function FinalAdmissionScreen({ value, onChange, onNext }: FinalAdmissionScreenProps) {
+export default function StressPatternScreen({ value, onChange, onNext }: StressPatternScreenProps) {
   return (
     <div className="text-center">
-      <motion.h2 
+      <motion.h2
         className="question-text"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
       >
-        Despite trying everything, you still struggle with...
+        When you are stressed, you tend to...
       </motion.h2>
-      
-      <motion.p 
+
+      <motion.p
         className="text-feminine-gray-soft mb-8"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
       >
-        This is the #1 thing blocking your progress
+        Your stress response reveals your hormonal blocks
       </motion.p>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
-        {admissionOptions.map((option, index) => (
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+        {stressOptions.map((option, index) => (
           <motion.button
             key={option.value}
             onClick={() => onChange(option.value)}
@@ -49,7 +48,10 @@ export default function FinalAdmissionScreen({ value, onChange, onNext }: FinalA
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            <span className="font-medium">{option.label}</span>
+            <div className="flex items-center gap-4">
+              <span className="text-3xl">{option.emoji}</span>
+              <span className="font-semibold text-lg">{option.label}</span>
+            </div>
           </motion.button>
         ))}
       </div>
