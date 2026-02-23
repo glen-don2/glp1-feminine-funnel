@@ -7,6 +7,8 @@ import { getQuizState, saveQuizState, calculateDiagnosis, clearQuizState } from 
 import { useRouter } from 'next/navigation'
 import ProgressIndicator from '@/components/ProgressIndicator'
 import ScreenWrapper from '@/components/ScreenWrapper'
+import MobileHeader from '@/components/MobileHeader'
+import ExitIntentModal from '@/components/ExitIntentModal'
 import AgeScreen from '@/components/screens/AgeScreen'
 import JourneyScreen from '@/components/screens/JourneyScreen'
 import BodyGoalScreen from '@/components/screens/BodyGoalScreen'
@@ -23,14 +25,17 @@ import FutureFearScreen from '@/components/screens/FutureFearScreen'
 import PressureReleaseScreen from '@/components/screens/PressureReleaseScreen'
 import FinalAdmissionScreen from '@/components/screens/FinalAdmissionScreen'
 import MicroCommit2Screen from '@/components/screens/MicroCommit2Screen'
+import HalfwayScreen from '@/components/screens/HalfwayScreen'
 import LoadingScreen from '@/components/screens/LoadingScreen'
 
-const TOTAL_SCREENS = 17
+const TOTAL_SCREENS = 18
 
 export default function QuizPage() {
   const router = useRouter()
   const [mounted, setMounted] = useState(false)
   const [state, setState] = useState<QuizState>(initialQuizState)
+  const [showExitModal, setShowExitModal] = useState(false)
+  const [exitIntentTriggered, setExitIntentTriggered] = useState(false)
   
   useEffect(() => {
     const savedState = getQuizState()
@@ -45,6 +50,39 @@ export default function QuizPage() {
       saveQuizState(state)
     }
   }, [state, mounted])
+
+  useEffect(() => {
+    if (!exitIntentTriggered) return
+
+    const handleMouseLeave = (e: MouseEvent) => {
+      if (e.clientY <= 0 && state.currentScreen > 1 && state.currentScreen < 16) {
+        setShowExitModal(true)
+      }
+    }
+
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (state.currentScreen > 1 && state.currentScreen < 16) {
+        e.preventDefault()
+        return ''
+      }
+    }
+
+    document.addEventListener('mouseleave', handleMouseLeave)
+    window.addEventListener('beforeunload', handleBeforeUnload)
+
+    return () => {
+      document.removeEventListener('mouseleave', handleMouseLeave)
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+    }
+  }, [exitIntentTriggered, state.currentScreen])
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setExitIntentTriggered(true)
+    }, 5000)
+
+    return () => clearTimeout(timer)
+  }, [])
   
   const updateState = useCallback((updates: Partial<QuizState>) => {
     setState(prev => ({ ...prev, ...updates }))
@@ -59,7 +97,7 @@ export default function QuizPage() {
     updateState({ 
       diagnosis,
       completedAt: new Date().toISOString(),
-      currentScreen: 17 
+      currentScreen: 18 
     })
     router.push('/results')
   }, [state, updateState, router])
@@ -67,6 +105,14 @@ export default function QuizPage() {
   const restartQuiz = useCallback(() => {
     clearQuizState()
     setState(initialQuizState)
+  }, [])
+
+  const handleExitModalClose = useCallback(() => {
+    setShowExitModal(false)
+  }, [])
+
+  const handleExitModalReturn = useCallback(() => {
+    setShowExitModal(false)
   }, [])
   
   if (!mounted) {
@@ -77,9 +123,10 @@ export default function QuizPage() {
     )
   }
   
+  const progress = Math.round(((state.currentScreen - 1) / (TOTAL_SCREENS - 1)) * 100)
+  
   const renderScreen = () => {
     switch (state.currentScreen) {
-      // Phase 1: Graduality (Screens 1-2)
       case 1:
         return (
           <AgeScreen
@@ -96,7 +143,6 @@ export default function QuizPage() {
             onNext={nextScreen}
           />
         )
-      // Phase 1: Positive/Aspirational (Screens 3-5)
       case 3:
         return (
           <BodyGoalScreen
@@ -121,7 +167,6 @@ export default function QuizPage() {
             onNext={nextScreen}
           />
         )
-      // Phase 2: Neutral/Behavioral (Screens 6-9)
       case 6:
         return (
           <EnergyScreen
@@ -139,6 +184,8 @@ export default function QuizPage() {
           />
         )
       case 8:
+        return <HalfwayScreen onContinue={nextScreen} />
+      case 9:
         return (
           <ProblemAreasScreen
             value={state.problemArea}
@@ -146,7 +193,7 @@ export default function QuizPage() {
             onNext={nextScreen}
           />
         )
-      case 9:
+      case 10:
         return (
           <StressPatternScreen
             value={state.stressPattern}
@@ -154,8 +201,7 @@ export default function QuizPage() {
             onNext={nextScreen}
           />
         )
-      // Phase 3: Negative/Ownership (Screens 10-15)
-      case 10:
+      case 11:
         return (
           <DietEmotionScreen
             value={state.dietEmotion}
@@ -163,7 +209,7 @@ export default function QuizPage() {
             onNext={nextScreen}
           />
         )
-      case 11:
+      case 12:
         return (
           <EmotionSeverityScreen
             value={state.emotionSeverity}
@@ -171,13 +217,13 @@ export default function QuizPage() {
             onNext={nextScreen}
           />
         )
-      case 12:
+      case 13:
         return (
           <InfoPivotScreen
             onNext={nextScreen}
           />
         )
-      case 13:
+      case 14:
         return (
           <FutureFearScreen
             value={state.futureFear}
@@ -185,7 +231,7 @@ export default function QuizPage() {
             onNext={nextScreen}
           />
         )
-      case 14:
+      case 15:
         return (
           <PressureReleaseScreen
             value={state.pressureRelease || ''}
@@ -193,7 +239,7 @@ export default function QuizPage() {
             onNext={nextScreen}
           />
         )
-      case 15:
+      case 16:
         return (
           <FinalAdmissionScreen
             value={state.finalAdmission}
@@ -201,8 +247,7 @@ export default function QuizPage() {
             onNext={nextScreen}
           />
         )
-      // Commitment Screen (16)
-      case 16:
+      case 17:
         return (
           <MicroCommit2Screen
             value={state.microCommit2}
@@ -216,8 +261,7 @@ export default function QuizPage() {
             }}
           />
         )
-      // Loading/Summary (17)
-      case 17:
+      case 18:
         return <LoadingScreen onComplete={goToResults} blockType={state.diagnosis} />
       default:
         return null
@@ -230,6 +274,13 @@ export default function QuizPage() {
   
   return (
     <main className="quiz-container">
+      <MobileHeader 
+        showProgress={state.currentScreen <= 17}
+        progress={progress}
+        currentScreen={state.currentScreen}
+        totalScreens={TOTAL_SCREENS}
+      />
+      
       {state.currentScreen <= TOTAL_SCREENS && (
         <ProgressIndicator currentScreen={state.currentScreen} totalScreens={TOTAL_SCREENS} />
       )}
@@ -243,7 +294,7 @@ export default function QuizPage() {
       {state.currentScreen > 1 && state.currentScreen <= TOTAL_SCREENS && (
         <motion.button
           onClick={() => updateState({ currentScreen: state.currentScreen - 1 })}
-          className="mt-8 text-feminine-gray-soft text-sm hover:text-feminine-charcoal transition-colors"
+          className="mt-8 text-feminine-gray-soft text-sm hover:text-feminine-charcoal transition-colors mobile-tap-target py-2 px-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
@@ -251,6 +302,15 @@ export default function QuizPage() {
           Go back
         </motion.button>
       )}
+
+      <AnimatePresence>
+        {showExitModal && (
+          <ExitIntentModal
+            onClose={handleExitModalClose}
+            onReturn={handleExitModalReturn}
+          />
+        )}
+      </AnimatePresence>
     </main>
   )
 }

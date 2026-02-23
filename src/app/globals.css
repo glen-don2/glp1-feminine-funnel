@@ -29,12 +29,17 @@ body {
     @apply bg-feminine-pink hover:bg-feminine-pink-dark text-white font-semibold py-4 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5;
   }
   
+  .btn-primary-glow {
+    @apply bg-feminine-pink hover:bg-feminine-pink-dark text-white font-semibold py-4 px-8 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 animate-pulse-glow;
+  }
+  
   .btn-secondary {
     @apply bg-white hover:bg-feminine-pink-light text-feminine-charcoal font-medium py-3 px-6 rounded-full border-2 border-feminine-pink transition-all duration-300;
   }
   
   .card-option {
     @apply bg-white rounded-2xl p-6 cursor-pointer transition-all duration-300 border-2 border-transparent hover:border-feminine-pink hover:shadow-lg;
+    min-height: 60px;
   }
   
   .card-option-selected {
@@ -50,11 +55,55 @@ body {
   }
   
   .progress-bar {
-    @apply h-1 bg-feminine-pink-light rounded-full overflow-hidden;
+    @apply h-2 md:h-1 bg-feminine-pink-light rounded-full overflow-hidden;
   }
   
   .progress-fill {
     @apply h-full bg-feminine-pink transition-all duration-500 ease-out;
+  }
+  
+  .progress-bar-enhanced {
+    @apply h-3 bg-feminine-pink-light/50 rounded-full overflow-hidden shadow-inner;
+  }
+  
+  .progress-fill-enhanced {
+    @apply h-full bg-gradient-to-r from-feminine-pink to-feminine-pink-dark transition-all duration-500 ease-out shadow-[0_0_10px_rgba(248,180,196,0.5)];
+  }
+  
+  .tooltip-container {
+    @apply relative inline-flex;
+  }
+  
+  .tooltip-content {
+    @apply absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-feminine-charcoal text-white text-xs rounded-lg opacity-0 invisible transition-all duration-200 whitespace-nowrap z-50;
+  }
+  
+  .tooltip-container:hover .tooltip-content {
+    @apply opacity-100 visible;
+  }
+  
+  .mobile-tap-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+  
+  .floating-cta {
+    @apply fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-feminine-pink-light shadow-[0_-4px_20px_rgba(0,0,0,0.1)] z-50 px-4 py-3;
+  }
+  
+  .sticky-header {
+    @apply fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md border-b border-feminine-pink-light shadow-sm z-40;
+  }
+  
+  .skeleton {
+    @apply animate-pulse bg-feminine-pink-light rounded;
+  }
+  
+  .shadow-glow {
+    box-shadow: 0 0 30px rgba(248, 180, 196, 0.6);
+  }
+  
+  .shadow-glow-intense {
+    box-shadow: 0 0 50px rgba(248, 180, 196, 0.9), 0 0 80px rgba(248, 180, 196, 0.4);
   }
 }
 

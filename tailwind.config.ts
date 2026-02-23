@@ -32,6 +32,8 @@ const config: Config = {
         'slide-up': 'slideUp 0.6s ease-out',
         'pulse-soft': 'pulseSoft 2s ease-in-out infinite',
         'shimmer': 'shimmer 2s linear infinite',
+        'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
+        'bounce-subtle': 'bounceSubtle 1s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -49,6 +51,14 @@ const config: Config = {
         shimmer: {
           '0%': { backgroundPosition: '-200% 0' },
           '100%': { backgroundPosition: '200% 0' },
+        },
+        pulseGlow: {
+          '0%, 100%': { boxShadow: '0 0 20px rgba(248, 180, 196, 0.4)' },
+          '50%': { boxShadow: '0 0 40px rgba(248, 180, 196, 0.8)' },
+        },
+        bounceSubtle: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-5px)' },
         },
       },
     },

@@ -29,6 +29,15 @@ export default function AgeScreen({ value, onChange, onNext }: AgeScreenProps) {
         How old are you?
       </motion.h2>
       
+      <motion.p 
+        className="text-feminine-gray-soft mb-6"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.15 }}
+      >
+        This helps us calculate your metabolic profile and identify hormonal changes that affect weight loss.
+      </motion.p>
+      
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
         {ageOptions.map((option, index) => (
           <motion.button

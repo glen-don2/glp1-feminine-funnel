@@ -24,12 +24,12 @@ export default function AdvertorialPage() {
       </div>
 
       {/* URGENCY/SCARCITY BANNER (Funnel Professor P0 Fix) */}
-      <section className="py-4 px-4 bg-gradient-to-r from-feminine-pink via-feminine-pink-dark to-feminine-pink">
+      <section className="py-4 px-4 bg-gradient-to-r from-feminine-pink via-feminine-pink-dark to-feminine-pink shadow-glow">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-white font-bold text-sm md:text-base flex items-center justify-center gap-2">
-            <span className="text-xl">🔥</span>
+            <span className="text-xl animate-bounce-subtle">🔥</span>
             LIMITED RELEASE: Only 200 bottles remaining at launch pricing
-            <span className="text-xl">🔥</span>
+            <span className="text-xl animate-bounce-subtle">🔥</span>
           </p>
           <p className="text-white/80 text-xs mt-1">Offer expires at midnight • Price increases to €147 after release period</p>
         </div>
@@ -135,9 +135,24 @@ export default function AdvertorialPage() {
                 Personalized to YOU
               </span>
             </div>
-            <Link href="/quiz" className="inline-block bg-white text-feminine-pink font-bold px-10 py-4 rounded-full text-lg hover:bg-feminine-cream transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+            <Link href="/quiz" className="inline-block bg-white text-feminine-pink font-bold px-10 py-4 rounded-full text-lg hover:bg-feminine-cream transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 mobile-tap-target">
               Discover My Hormonal Block →
             </Link>
+            
+            <div className="flex flex-wrap items-center justify-center gap-4 mt-4 text-xs text-feminine-gray-soft">
+              <span className="flex items-center gap-1">
+                <span className="text-green-500">✓</span>
+                100% Free
+              </span>
+              <span className="flex items-center gap-1">
+                <span className="text-green-500">✓</span>
+                No Credit Card
+              </span>
+              <span className="flex items-center gap-1">
+                <span className="text-green-500">✓</span>
+                47 Seconds
+              </span>
+            </div>
           </div>
 
           {/* SOCIAL PROOF — CREATE URGENCY */}
@@ -569,9 +584,9 @@ export default function AdvertorialPage() {
           </div>
 
           {/* URGENCY CLOSE — FP Pattern */}
-          <div className="mt-8 bg-gradient-to-r from-red-500 to-red-600 rounded-2xl p-6 text-white text-center">
+          <div className="mt-8 bg-gradient-to-r from-red-500 to-red-600 rounded-2xl p-6 text-white text-center shadow-glow animate-pulse">
             <p className="text-xl font-bold mb-2">⏰ Only 200 bottles left at launch pricing</p>
-            <p className="text-white/90">Price increases to €147 at midnight. 47 women are taking the assessment right now.</p>
+            <p className="text-white/90">Price increases to €147 at midnight. <span className="font-bold">47 women</span> are taking the assessment right now.</p>
           </div>
 
           {/* Final CTA Section — FP OPTIMIZED */}
@@ -597,10 +612,26 @@ export default function AdvertorialPage() {
                   Personalized Results
                 </span>
               </div>
-              <Link href="/quiz" className="inline-block bg-white text-feminine-pink font-bold px-12 py-5 rounded-full text-xl hover:bg-feminine-cream transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1">
+              <Link href="/quiz" className="inline-block bg-white text-feminine-pink font-bold px-12 py-5 rounded-full text-xl hover:bg-feminine-cream transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 mobile-tap-target">
                 Discover My Hormonal Block →
               </Link>
-              <p className="text-white/70 text-sm mt-6">
+              
+              <div className="flex flex-wrap items-center justify-center gap-4 mt-6 text-sm text-white/80">
+                <span className="flex items-center gap-1">
+                  <span className="text-white">✓</span>
+                  180-Day Guarantee
+                </span>
+                <span className="flex items-center gap-1">
+                  <span className="text-white">✓</span>
+                  Clinician Approved
+                </span>
+                <span className="flex items-center gap-1">
+                  <span className="text-white">✓</span>
+                  EU Certified
+                </span>
+              </div>
+              
+              <p className="text-white/70 text-sm mt-4">
                 12,847 women discovered their block today • Results in 47 seconds
               </p>
             </div>
@@ -640,13 +671,13 @@ export default function AdvertorialPage() {
       </section>
 
       {/* Bottom CTA Bar — REFRAMED (Funnel Professor P1 Fix) */}
-      <section className="py-8 px-4 bg-feminine-charcoal sticky bottom-0 z-50">
+      <section className="py-6 px-4 bg-feminine-charcoal sticky bottom-0 z-50">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-white text-center sm:text-left">
             <p className="font-semibold">Ready to see your personalized protocol?</p>
             <p className="text-sm text-white/70">Join 50,000+ women who finally broke through</p>
           </div>
-          <Link href="/quiz" className="bg-feminine-pink hover:bg-feminine-pink-dark text-white font-bold px-8 py-3 rounded-full transition-all duration-300 whitespace-nowrap">
+          <Link href="/quiz" className="bg-feminine-pink hover:bg-feminine-pink-dark text-white font-bold px-8 py-3 rounded-full transition-all duration-300 whitespace-nowrap mobile-tap-target shadow-lg hover:shadow-xl">
             See My Protocol →
           </Link>
         </div>

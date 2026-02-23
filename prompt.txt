@@ -1,0 +1,60 @@
+Audit and optimize this GLP-1 Feminine sales funnel for maximum conversion using Funnel Professor principles.
+
+Current state: Landing page is ~90/100 optimized. Need to push to 95+/100.
+
+FILES TO ANALYZE AND OPTIMIZE:
+1. /home/ubuntu/projects/glp1-feminine-funnel/src/app/page.tsx (landing page)
+2. /home/ubuntu/projects/glp1-feminine-funnel/src/app/quiz/page.tsx (quiz flow)
+3. All quiz screen components in /home/ubuntu/projects/glp1-feminine-funnel/src/components/screens/
+4. /home/ubuntu/projects/glp1-feminine-funnel/src/app/globals.css
+5. /home/ubuntu/projects/glp1-feminine-funnel/tailwind.config.ts
+
+FUNNEL PROFESSOR OPTIMIZATIONS TO IMPLEMENT:
+
+P0 (Critical - Must Have):
+1. Visual pain points (already done - 4 Hormonal Blocks)
+2. Urgency/scarcity banners (already done)
+3. 180-Day Guarantee (already done)
+4. Emotional testimonials with specific transformations (already done)
+5. Quiz micro-commitments - ADD more commitment checkpoints in quiz flow
+6. Progress bar optimization - make it more prominent/visually engaging
+7. Mobile-first responsive check - ensure all CTAs are thumb-friendly
+
+P1 (High Impact):
+1. Cost comparison table (already done)
+2. Add floating CTA bar on mobile that follows scroll
+3. Optimize quiz loading states - add skeleton screens
+4. Add "exit intent" modal before leaving quiz (save progress + return offer)
+5. Sticky header on mobile with CTA
+6. Optimize above-the-fold on mobile - CTA visible without scrolling
+
+P2 (Polish):
+1. Add subtle animations to CTA buttons (pulse/glow on urgency elements)
+2. Optimize images - add lazy loading, proper sizing
+3. Add trust badges near quiz CTA
+4. A/B test variant: quiz-first vs read-first flow
+
+SPECIFIC QUIZ OPTIMIZATIONS:
+1. Add micro-commitment screen at screen 8 (50% mark): "You're halfway! Your personalized protocol is almost ready. Continue?"
+2. Add "Why we ask this" tooltip helper on each question
+3. Optimize results loading screen - add anticipation copy ("Analyzing your hormonal pattern...")
+4. Add urgency element to quiz completion: "12,847 women took this today"
+5. Screen 1 (Age): Add context "This helps us calculate your metabolic profile"
+6. Screen 16 (Micro-commit): Strengthen the yes/no framing
+
+TAILWIND/STYLE OPTIMIZATIONS:
+1. Ensure all pink CTAs have consistent hover states
+2. Add shadow-glow animation for urgency elements
+3. Optimize tap targets for mobile (min 44px)
+4. Add backdrop blur to floating elements
+
+DELIVERABLES:
+1. Implement all P0 and P1 optimizations listed above
+2. Create at least 3 new/modified quiz screen components
+3. Update globals.css with new animations/utilities
+4. Ensure mobile responsiveness throughout
+5. Add progress save/restore functionality improvements
+6. Run build to verify no errors
+7. Commit changes with descriptive message
+
+Focus on mobile experience - 70%+ of traffic will be mobile. The quiz must feel fast, trustworthy, and urgent.

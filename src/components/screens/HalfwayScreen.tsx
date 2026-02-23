@@ -1,43 +1,27 @@
 'use client'
 
-import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 
-interface MicroCommit2ScreenProps {
-  value: boolean
-  onYes: () => void
-  onNo: () => void
+interface HalfwayScreenProps {
+  onContinue: () => void
 }
 
-export default function MicroCommit2Screen({ value, onYes, onNo }: MicroCommit2ScreenProps) {
-  useEffect(() => {
-    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
-      e.preventDefault()
-      return ''
-    }
-
-    window.addEventListener('beforeunload', handleBeforeUnload)
-
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload)
-    }
-  }, [])
-
+export default function HalfwayScreen({ onContinue }: HalfwayScreenProps) {
   return (
     <div className="text-center">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="bg-white rounded-3xl p-8 shadow-xl mb-8"
+        className="bg-gradient-to-br from-feminine-pink-light to-white rounded-3xl p-8 shadow-xl mb-8 border-2 border-feminine-pink"
       >
         <motion.div
-          className="w-16 h-16 bg-feminine-gold-light rounded-full flex items-center justify-center mx-auto mb-6"
+          className="w-20 h-20 bg-feminine-pink rounded-full flex items-center justify-center mx-auto mb-6"
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2, type: 'spring' }}
         >
-          <span className="text-3xl">✨</span>
+          <span className="text-4xl">🎯</span>
         </motion.div>
 
         <motion.h2
@@ -46,75 +30,65 @@ export default function MicroCommit2Screen({ value, onYes, onNo }: MicroCommit2S
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          Your Diagnosis Is Ready
+          You&apos;re Halfway There!
         </motion.h2>
 
         <motion.p
-          className="text-feminine-charcoal mb-6"
+          className="text-feminine-charcoal mb-6 text-lg"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
         >
-          12,847 women discovered their hormonal block today. Your results are ready.
+          Your personalized protocol is almost ready.
         </motion.p>
 
         <motion.div
-          className="bg-feminine-pink-light rounded-xl p-4 mb-4"
+          className="bg-white rounded-xl p-4 mb-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
         >
           <p className="text-sm font-medium text-feminine-charcoal mb-2">
-            In the next 60 seconds, you will discover:
+            Almost done! At the end you&apos;ll get:
           </p>
-          <ul className="text-sm text-feminine-gray-soft space-y-1 text-left">
+          <ul className="text-sm text-feminine-gray-soft space-y-2 text-left">
             <li className="flex items-center gap-2">
               <span className="text-feminine-pink">✓</span>
-              Your specific hormonal block type
+              Your specific hormonal block diagnosis
             </li>
             <li className="flex items-center gap-2">
               <span className="text-feminine-pink">✓</span>
-              Why diets have failed you
+              Why diets have failed you until now
             </li>
             <li className="flex items-center gap-2">
               <span className="text-feminine-pink">✓</span>
-              The exact protocol for your body
+              Your personalized 14-day protocol
             </li>
             <li className="flex items-center gap-2">
               <span className="text-feminine-pink">✓</span>
-              Real results from women like you
+              Results from women like you
             </li>
           </ul>
         </motion.div>
 
         <motion.p
-          className="text-feminine-pink font-semibold"
+          className="text-feminine-pink-dark font-semibold"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
         >
-          This is your moment. Don&apos;t leave without knowing.
+          👑 12,847 women started this assessment today
         </motion.p>
       </motion.div>
 
       <motion.button
-        onClick={onYes}
-        className="btn-primary-glow w-full mb-4 mobile-tap-target"
+        onClick={onContinue}
+        className="btn-primary-glow w-full text-lg py-5"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.7 }}
       >
-        Yes. Show me my diagnosis.
-      </motion.button>
-
-      <motion.button
-        onClick={onNo}
-        className="text-feminine-gray-soft text-sm hover:text-feminine-charcoal transition-colors mobile-tap-target"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.8 }}
-      >
-        I&apos;m not ready yet →
+        Continue My Assessment →
       </motion.button>
     </div>
   )

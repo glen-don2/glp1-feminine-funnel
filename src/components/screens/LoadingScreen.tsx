@@ -5,6 +5,14 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { DiagnosisType } from '@/types/quiz'
 import { getQuizState } from '@/lib/quiz-state'
 
+const anticipationCopy = [
+  "Analyzing your hormonal patterns...",
+  "Cross-referencing with 50,000+ women's data...",
+  "Identifying your metabolic profile...",
+  "Calculating your personalized protocol...",
+  "Almost there! Finalizing your results...",
+]
+
 const tips = [
   "Shocking truth: Your 3pm sugar crash is not willpower failure. It is cortisol spiking and forcing fat storage around your midsection.",
   "Estrogen dominance makes women store 80% of fat in hips and thighs. Dieting cannot fix hormones. Only hormone targeting can.",
@@ -73,9 +81,9 @@ const blockTypeTestimonials: Record<string, { quote: string; name: string; age: 
 }
 
 const socialProofStats = [
-  { value: '12,847', label: 'Women helped' },
+  { value: '12,847', label: 'Women today' },
   { value: '96%', label: 'Report results' },
-  { value: '4.9/5', label: 'Average rating' },
+  { value: '4.9/5', label: 'Rating' },
   { value: '100K+', label: 'Bottles sold' },
 ]
 
@@ -87,6 +95,7 @@ interface LoadingScreenProps {
 export default function LoadingScreen({ onComplete, blockType: propBlockType }: LoadingScreenProps) {
   const [progress, setProgress] = useState(0)
   const [currentTip, setCurrentTip] = useState(0)
+  const [anticipationIndex, setAnticipationIndex] = useState(0)
   const [blockType, setBlockType] = useState<string>('cortisol')
 
   useEffect(() => {
@@ -101,7 +110,6 @@ export default function LoadingScreen({ onComplete, blockType: propBlockType }: 
   }, [propBlockType])
 
   useEffect(() => {
-    // 8 seconds loading time
     const interval = setInterval(() => {
       setProgress(prev => {
         if (prev >= 100) {
@@ -124,10 +132,28 @@ export default function LoadingScreen({ onComplete, blockType: propBlockType }: 
     return () => clearInterval(tipInterval)
   }, [])
 
+  useEffect(() => {
+    const anticipationInterval = setInterval(() => {
+      setAnticipationIndex(prev => (prev + 1) % anticipationCopy.length)
+    }, 2000)
+
+    return () => clearInterval(anticipationInterval)
+  }, [])
+
   const testimonial = blockTypeTestimonials[blockType] || blockTypeTestimonials['cortisol']
 
   return (
     <div className="text-center">
+      {/* Urgency Banner */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="bg-gradient-to-r from-feminine-pink to-feminine-pink-dark rounded-full px-4 py-2 mb-6 inline-flex items-center gap-2"
+      >
+        <span className="text-white text-sm">🔥</span>
+        <span className="text-white font-semibold text-sm">12,847 women took this assessment today</span>
+      </motion.div>
+
       {/* Progress Section */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -135,7 +161,7 @@ export default function LoadingScreen({ onComplete, blockType: propBlockType }: 
         className="mb-8"
       >
         <motion.div
-          className="w-20 h-20 mx-auto mb-6"
+          className="w-24 h-24 mx-auto mb-6 relative"
           animate={{ rotate: 360 }}
           transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
         >
@@ -160,27 +186,22 @@ export default function LoadingScreen({ onComplete, blockType: propBlockType }: 
               transform="rotate(-90 50 50)"
             />
           </svg>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-feminine-pink-dark font-bold text-xl">{Math.round(progress)}%</span>
+          </div>
         </motion.div>
 
-        <h2 className="font-display text-2xl md:text-3xl mb-4">
-          Analyzing Your Hormonal Pattern...
+        <h2 className="font-display text-2xl md:text-3xl mb-4 text-feminine-charcoal">
+          {anticipationCopy[anticipationIndex]}
         </h2>
 
-        <p className="text-feminine-gray-soft mb-6">
-          {progress < 30 && 'Processing your metabolic patterns...'}
-          {progress >= 30 && progress < 60 && 'Identifying hormonal imbalances...'}
-          {progress >= 60 && progress < 90 && 'Calculating your personalized diagnosis...'}
-          {progress >= 90 && 'Finalizing your results...'}
-        </p>
-
         <div className="w-full max-w-xs mx-auto">
-          <div className="progress-bar h-2">
+          <div className="progress-bar h-3">
             <motion.div
-              className="progress-fill"
+              className="progress-fill bg-gradient-to-r from-feminine-pink to-feminine-pink-dark"
               style={{ width: `${progress}%` }}
             />
           </div>
-          <p className="text-sm text-feminine-gray-soft mt-2">{Math.round(progress)}%</p>
         </div>
       </motion.div>
 
@@ -200,7 +221,7 @@ export default function LoadingScreen({ onComplete, blockType: propBlockType }: 
             transition={{ duration: 0.5 }}
             className="text-sm text-feminine-charcoal font-medium"
           >
-            {tips[currentTip]}
+            💡 {tips[currentTip]}
           </motion.p>
         </AnimatePresence>
       </motion.div>
@@ -210,7 +231,7 @@ export default function LoadingScreen({ onComplete, blockType: propBlockType }: 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
-        className="bg-white rounded-2xl p-6 shadow-lg max-w-sm mx-auto mb-6"
+        className="bg-white rounded-2xl p-6 shadow-lg max-w-sm mx-auto mb-6 border-2 border-feminine-pink-light"
       >
         <p className="text-sm text-feminine-gray-soft mb-4">Based on women like you with {blockType.replace('_', ' ')} patterns:</p>
 
@@ -224,7 +245,7 @@ export default function LoadingScreen({ onComplete, blockType: propBlockType }: 
               transition={{ duration: 0.3 }}
             >
               <p className="italic text-feminine-charcoal mb-4 text-lg leading-relaxed">
-                "{testimonial.quote}"
+                &quot;{testimonial.quote}&quot;
               </p>
               
               <div className="flex items-center justify-between">
@@ -267,7 +288,7 @@ export default function LoadingScreen({ onComplete, blockType: propBlockType }: 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
-        className="flex items-center justify-center gap-6 text-sm text-feminine-gray-soft"
+        className="flex flex-wrap items-center justify-center gap-4 text-sm text-feminine-gray-soft"
       >
         <div className="flex items-center gap-1">
           <span className="text-green-500">●</span>
@@ -275,7 +296,7 @@ export default function LoadingScreen({ onComplete, blockType: propBlockType }: 
         </div>
         <div className="flex items-center gap-1">
           <span className="text-feminine-gold">★</span>
-          <span>60-Day Guarantee</span>
+          <span>180-Day Guarantee</span>
         </div>
         <div className="flex items-center gap-1">
           <span className="text-feminine-pink">✓</span>
