@@ -26,9 +26,9 @@ export default function AdvertorialPage() {
       {/* Hero Section - Editorial Style */}
       <section className="py-12 px-4 bg-gradient-to-br from-feminine-cream via-white to-feminine-pink-light">
         <div className="max-w-4xl mx-auto">
-          <p className="text-feminine-pink-dark font-medium mb-3 tracking-wider uppercase text-xs">Women&apos;s Health Report • February 2026</p>
+          <p className="text-feminine-pink-dark font-medium mb-3 tracking-wider uppercase text-xs">Women&apos;s Health Report • 2026</p>
           <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-feminine-charcoal mb-6 leading-tight">
-            7 Reasons Your Diet Failed in January
+            7 Reasons Your Last Diet Failed
             <span className="text-feminine-pink-dark block mt-2">(And the 14-Day Fix Doctors Are Quietly Prescribing)</span>
           </h1>
           
@@ -39,15 +39,15 @@ export default function AdvertorialPage() {
               By Dr. Rachel Morrison, Endocrinology
             </span>
             <span>|</span>
-            <span>Updated February 23, 2026</span>
+            <span>Updated March 2026</span>
             <span>|</span>
             <span className="text-feminine-pink-dark font-medium">12 min read</span>
           </div>
 
           {/* Opening Hook */}
           <p className="text-lg text-feminine-charcoal leading-relaxed mb-6">
-            If you started 2026 with a new diet and already find yourself back at square one, you&apos;re not alone. 
-            <strong> 83% of women abandon their New Year&apos;s weight loss goals by February</strong> — but it&apos;s not because they lack willpower.
+            If you&apos;ve tried diet after diet and always end up back at square one, you&apos;re not alone. 
+            <strong> 83% of women regain all the weight they lose within 12 months</strong> — but it&apos;s not because they lack willpower.
           </p>
           <p className="text-lg text-feminine-charcoal leading-relaxed mb-8">
             After 15 years treating women with stubborn weight issues, I&apos;ve discovered something the diet industry doesn&apos;t want you to know: <strong>your hormones are working against you</strong>. And until you address them, every diet is doomed to fail.
@@ -84,8 +84,8 @@ export default function AdvertorialPage() {
               <tbody>
                 <tr className="border-b border-feminine-pink-light">
                   <td className="p-4 font-medium text-feminine-charcoal">Weight Loss Speed</td>
-                  <td className="p-4 text-center text-feminine-gray-soft">2-3 lbs/week initially, then plateau</td>
-                  <td className="p-4 text-center bg-feminine-pink-light font-medium text-feminine-pink-dark">1-2 lbs/week consistently</td>
+                  <td className="p-4 text-center text-feminine-gray-soft">1-1.5 kg/week initially, then plateau</td>
+                  <td className="p-4 text-center bg-feminine-pink-light font-medium text-feminine-pink-dark">0.5-1 kg/week consistently</td>
                 </tr>
                 <tr className="border-b border-feminine-pink-light">
                   <td className="p-4 font-medium text-feminine-charcoal">Energy Levels</td>
@@ -298,7 +298,7 @@ export default function AdvertorialPage() {
                 <div className="w-10 h-10 bg-feminine-pink rounded-full flex items-center justify-center text-white font-bold">S</div>
                 <div>
                   <p className="font-semibold text-feminine-charcoal text-sm">Sarah M.</p>
-                  <p className="text-xs text-feminine-pink-dark">Lost 23 lbs in 8 weeks</p>
+                  <p className="text-xs text-feminine-pink-dark">Lost 10 kg in 8 weeks</p>
                 </div>
               </div>
             </div>
@@ -314,7 +314,7 @@ export default function AdvertorialPage() {
                 <div className="w-10 h-10 bg-feminine-pink rounded-full flex items-center justify-center text-white font-bold">J</div>
                 <div>
                   <p className="font-semibold text-feminine-charcoal text-sm">Jennifer L.</p>
-                  <p className="text-xs text-feminine-pink-dark">Lost 18 lbs in 6 weeks</p>
+                  <p className="text-xs text-feminine-pink-dark">Lost 8 kg in 6 weeks</p>
                 </div>
               </div>
             </div>
@@ -330,7 +330,7 @@ export default function AdvertorialPage() {
                 <div className="w-10 h-10 bg-feminine-pink rounded-full flex items-center justify-center text-white font-bold">M</div>
                 <div>
                   <p className="font-semibold text-feminine-charcoal text-sm">Maria K.</p>
-                  <p className="text-xs text-feminine-pink-dark">Lost 31 lbs in 12 weeks</p>
+                  <p className="text-xs text-feminine-pink-dark">Lost 14 kg in 12 weeks</p>
                 </div>
               </div>
             </div>
